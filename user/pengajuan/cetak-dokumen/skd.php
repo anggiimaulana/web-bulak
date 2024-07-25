@@ -6,7 +6,7 @@
 
     // Mengecek apakah pengguna sudah login
     if (!isset($_SESSION['nik'])) {
-        header('Location: ../../../../project/login.php');
+        header('Location: ../../../../project-bulak/login.php');
         exit();
     }
 
