@@ -146,7 +146,7 @@ $result = $conn->query($sql);
 	</section>
 	<!-- CONTENT -->
 
-	<script src="script.js"></script>
+    <script src="../user/js/script.js"></script>
 	<script>
 	document.addEventListener('DOMContentLoaded', (event) => {
 		// Handle delete button click

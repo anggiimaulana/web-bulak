@@ -90,7 +90,7 @@
             <div class="table-data">
                 <div class="order">
                     <div class="formulir-pengajuan" id="pengajuanForm">
-                        <form action="login-register/daftar.php" method="POST">
+                        <form action="../login-register/daftar.php" method="POST">
                             <h3>Daftar Akun</h3>
                             <div class="form-row">
                                 <div class="form-column">

@@ -147,6 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </section>
     <!-- CONTENT -->
 
-    <script src="script.js"></script>
+    <script src="../user/js/script.js"></script>
 </body>
 </html>

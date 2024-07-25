@@ -203,6 +203,6 @@ $result_users = $conn->query($sql_users);
     <!-- CONTENT -->
     
 
-    <script src="script.js"></script>
+    <script src="../user/js/script.js"></script>
 </body>
 </html>

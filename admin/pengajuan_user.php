@@ -148,6 +148,6 @@ $result = $conn->query($sql);
             </div>
         </main>
     </section>
-    <script src="script.js"></script>
+    <script src="../user/js/script.js"></script>
 </body>
 </html>
