@@ -165,7 +165,7 @@
 
     $pdf->SetFont('Times', 'B', 12); // Set font to bold
     $ket = 'dipergunakan '. $keterangan_tidak_mampu . '.';
-    $pdf->MultiCell(0, 7, $ket, 0, 'J');
+    $pdf->MultiCell(0, 7, $ket, 0, 'C');
 
     // penutup
     $pdf->SetFont('Times', '', 12);
