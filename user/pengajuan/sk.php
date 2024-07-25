@@ -84,7 +84,7 @@ $userData = mysqli_fetch_assoc($result);
             <div class="table-data">
                 <div class="order">
                     <div class="formulir-pengajuan"  id="pengajuanForm">
-                        <form id="pengajuanForm" action="proses/sk_nikah.php" method="POST">
+                        <form id="pengajuanForm" action="proses/sk.php" method="POST">
                             <h4>* Mohon cek kembali data diri anda!</h4>
                             <div class="form-row">
                                 <div class="form-column">
