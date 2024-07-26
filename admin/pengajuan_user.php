@@ -7,13 +7,13 @@ if (isset($_GET['reset'])) {
     $kategori = 0;
     $search = '';
 } else {
-    // / Get filter and search parameters
+    // Get filter and search parameters
     $kategori = isset($_GET['kategori']) ? (int)$_GET['kategori'] : 0;
     $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     
     // Query to fetch data
-    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan, p.tanggal_pengajuan, p.status 
+    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan, p.tanggal_pengajuan, p.tanggal_acc, p.status 
             FROM pengajuan p
             JOIN user u ON p.nik = u.nik
             JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan";
@@ -34,8 +34,8 @@ if (isset($_GET['reset'])) {
     }
 }
     
-    $sql .= " ORDER BY p.id_pengajuan DESC";
-    $result = $conn->query($sql);
+$sql .= " ORDER BY p.id_pengajuan DESC";
+$result = $conn->query($sql);
 ?>
 
 <?php include 'header.php'; ?>
@@ -135,7 +135,7 @@ if (isset($_GET['reset'])) {
                             </a>
                             <div class="filter-menu" id="filter-menu">
                                 <form method="GET" action="pengajuan_user.php">
-                                <h5>Kategori</h5>
+                                    <h5>Kategori</h5>
                                     <select name="kategori" onchange="this.form.submit()">
                                         <option value="" <?php if ($kategori == 0) echo 'selected';?>>Semua</option>
                                         <option value="1" <?php if ($kategori == 1) echo 'selected';?>>Surat Keterangan Usaha</option>
@@ -145,7 +145,7 @@ if (isset($_GET['reset'])) {
                                         <option value="5" <?php if ($kategori == 5) echo 'selected';?>>Surat Keterangan Domisili</option>
                                         <option value="6" <?php if ($kategori == 6) echo 'selected';?>>Surat Keterangan</option>
                                     </select>
-                                <h5>Status</h5>
+                                    <h5>Status</h5>
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="" <?php if ($status == '') echo 'selected';?>>Semua</option>
                                         <option value="Acc" <?php if ($status == 'Acc') echo 'selected';?>>Acc</option>
@@ -157,7 +157,7 @@ if (isset($_GET['reset'])) {
                                 <i class="bx bx-search"></i> Cari
                             </a>
                             <div class="search-menu" id="search-menu">
-                                <form method="GET" action="pengajuan_user.php" class="search-form" >
+                                <form method="GET" action="pengajuan_user.php" class="search-form">
                                     <input type="text" name="search" placeholder="Cari Nama User" value="<?php echo htmlspecialchars($search);?>">
                                     <button class="pencarian" type="submit">Cari</button>
                                 </form>
@@ -172,6 +172,7 @@ if (isset($_GET['reset'])) {
                                 <th>Nama</th>
                                 <th>Kategori</th>
                                 <th>Tanggal Pengajuan</th>
+                                <th>Tanggal Acc</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -196,6 +197,7 @@ if (isset($_GET['reset'])) {
                                     echo "<td><p>" . htmlspecialchars($row['nama_user']) . "</p></td>";
                                     echo "<td>" . htmlspecialchars($row['jenis_pengajuan']) . "</td>";
                                     echo "<td>" . date('d-m-Y', strtotime($row['tanggal_pengajuan'])) . "</td>";
+                                    echo "<td>" . (!empty($row['tanggal_acc']) ? date('d-m-Y', strtotime($row['tanggal_acc'])) : '-') . "</td>";
                                     echo "<td><span class='status " . htmlspecialchars($statusClass) . "'>" . htmlspecialchars(ucfirst($row['status'])) . "</span></td>";
                                     echo "<td><a href='edit-pengajuan.php?id=" . $row['id_pengajuan'] . "' class='status edit'>Tinjau</a></td>";
                                     echo "</tr>";

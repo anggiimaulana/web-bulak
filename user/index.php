@@ -173,6 +173,7 @@
 							p.id_pengajuan,
 							p.id_kategori,
 							p.tanggal_pengajuan,
+							p.tanggal_acc,
 							p.status,
 							k.jenis_pengajuan
 						FROM pengajuan p
@@ -240,6 +241,7 @@
 									<th>No</th>
 									<th>Kategori</th>
 									<th>Tanggal Pengajuan</th>
+									<th>Tanggal Acc</th>
 									<th>Status</th>
 									<th>Hasil</th>
 								</tr>
@@ -277,7 +279,8 @@
 								<tr>
 									<td><?php echo $no++; ?></td>
 									<td><p><?php echo htmlspecialchars($row['jenis_pengajuan']); ?></p></td>
-									<td><?php echo htmlspecialchars($row['tanggal_pengajuan']); ?></td>
+									<td><?php echo htmlspecialchars(date('d-m-Y', strtotime($row['tanggal_pengajuan']))); ?></td>
+									<td><?php echo htmlspecialchars(!empty($row['tanggal_acc']) ? date('d-m-Y', strtotime($row['tanggal_acc'])) : '-'); ?></td>
 									<td><span class="status <?php echo $status_class; ?>"><?php echo ucfirst($row['status']); ?></span></td>
 									<td>
 										<a href="<?php echo $url; ?>" class="status-download <?php echo $disabled_class; ?>" <?php echo $disabled_attribute; ?>>

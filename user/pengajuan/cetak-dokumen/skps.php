@@ -33,13 +33,13 @@
         $data_pengajuan = mysqli_fetch_assoc($result2);
         $ktp_sementara_berlaku = $data_pengajuan['masa_ktp_sementara'];
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
-        $tanggal_pengajuan = $data_pengajuan['tanggal_pengajuan'];
+        $tanggal_acc = $data_pengajuan['tanggal_acc'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
     }
 
     // Membuat nama file sesuai format yang diinginkan
-    $nama_file = 'SKPS_' . $userData['nama'] . '_' . $tanggal_pengajuan . '.pdf';
+    $nama_file = 'SKPS_' . $userData['nama'] . '_' . $tanggal_acc . '.pdf';
 
     // membuat pdf
     $pdf = new FPDF('P', 'mm', 'A4');
@@ -189,7 +189,7 @@
     $startY += 7; // Tambahkan Y untuk baris berikutnya
     $pdf->SetXY($startX, $startY);
     $pdf->Cell(85, 7, ' ', 0, 0, 'L'); // Teks Label
-    $pdf->Cell(0, 7, 'Bulak, '.$tanggal_pengajuan_indo, 0, 1, 'L'); // Data
+    $pdf->Cell(0, 7, 'Bulak, '.$tanggal_acc, 0, 1, 'L'); // Data
     
     $startY += 7; // Tambahkan Y untuk baris berikutnya
     $pdf->SetXY($startX, $startY);

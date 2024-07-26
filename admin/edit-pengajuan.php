@@ -7,10 +7,10 @@ $row = null; // Inisialisasi variabel
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan AS kategori, p.tanggal_pengajuan, p.status 
-        FROM pengajuan p
-        JOIN user u ON p.nik = u.nik
-        JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan
-        WHERE p.id_pengajuan = ?";
+            FROM pengajuan p
+            JOIN user u ON p.nik = u.nik
+            JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan
+            WHERE p.id_pengajuan = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -28,9 +28,10 @@ if (isset($_GET['id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id_pengajuan"];
     $status = $_POST["status"];
+    $tanggal_acc = $_POST["tanggal_acc"];
 
-    $stmt = $conn->prepare("UPDATE pengajuan SET status=? WHERE id_pengajuan=?");
-    $stmt->bind_param("si", $status, $id);
+    $stmt = $conn->prepare("UPDATE pengajuan SET status=?, tanggal_acc=? WHERE id_pengajuan=?");
+    $stmt->bind_param("ssi", $status, $tanggal_acc, $id);
 
     if ($stmt->execute()) {
         header("Location: pengajuan_user.php");
@@ -43,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<?php include 'header.php' ?>
+<?php include 'header.php'; ?>
 <body>
     <!-- SIDEBAR -->
     <section id="sidebar">
@@ -64,7 +65,7 @@ $conn->close();
                     <span class="text">Artikel</span>
                 </a>
             </li>
-            <li  class="active">
+            <li class="active">
                 <a href="pengajuan_user.php">
                     <i class='bx bxs-file'></i>
                     <span class="text">Pengajuan User</span>
@@ -123,7 +124,7 @@ $conn->close();
                     <ul class="breadcrumb">
                         <li><a href="index.php">Admin</a></li>
                         <li><i class='bx bx-chevron-right'></i></li>
-                        <li><a class="active" href="kritik-saran.php">Edit Pengajuan User</a></li>
+                        <li><a class="active" href="pengajuan_user.php">Edit Pengajuan User</a></li>
                     </ul>
                 </div>
             </div>
@@ -133,35 +134,40 @@ $conn->close();
                         <h3>Form Pengajuan</h3>
                     </div>
                     <div class="formulir-pengajuan" id="pengajuanForm">
-            <form action="edit-pengajuan.php" method="POST">
-                <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
+                        <form action="edit-pengajuan.php" method="POST">
+                            <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
 
-                <div class="data-user">
-                    <label for="nama">Nama</label>
-                    <input type="text" id="nama" value="<?php echo htmlspecialchars($row['nama_user'] ?? ''); ?>" required>
-                </div>
+                            <div class="data-user">
+                                <label for="nama">Nama</label>
+                                <input type="text" id="nama" value="<?php echo htmlspecialchars($row['nama_user'] ?? ''); ?>" disabled>
+                            </div>
 
-                <div class="data-user">
-                    <label for="jenis_pengajuan">Kategori</label>
-                    <input type="text" id="jenis_pengajuan" value="<?php echo htmlspecialchars($row['kategori'] ?? ''); ?>" required>
-                </div>
+                            <div class="data-user">
+                                <label for="jenis_pengajuan">Kategori</label>
+                                <input type="text" id="jenis_pengajuan" value="<?php echo htmlspecialchars($row['kategori'] ?? ''); ?>" disabled>
+                            </div>
 
-                <div class="data-user">
-                    <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
-                    <input type="text" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" required>
-                </div>
+                            <div class="data-user">
+                                <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
+                                <input type="date" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" disabled>
+                            </div>
 
-                <div class="data-user">
-                    <label for="status">Status</label>
-                    <select id="status" name="status" required>
-                        <option value="Acc" <?php echo ($row['status'] ?? '') === 'Acc' ? 'selected' : ''; ?>>Acc</option>
-                        <option value="Pending" <?php echo ($row['status'] ?? '') === 'Pending' ? 'selected' : ''; ?>>Pending</option>
-                    </select>
-                </div>
+                            <div class="data-user">
+                                <label for="tanggal_acc">Tanggal Acc</label>
+                                <input type="date" id="tanggal_acc" name="tanggal_acc" required>
+                            </div>
 
-                <button type="submit">Update</button>
-            </form>
-        </div>
+                            <div class="data-user">
+                                <label for="status">Status</label>
+                                <select id="status" name="status" required>
+                                    <option value="Acc" <?php echo ($row['status'] ?? '') === 'Acc' ? 'selected' : ''; ?>>Acc</option>
+                                    <option value="Pending" <?php echo ($row['status'] ?? '') === 'Pending' ? 'selected' : ''; ?>>Pending</option>
+                                </select>
+                            </div>
+
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>

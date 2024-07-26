@@ -35,13 +35,13 @@
         $nama_kk = $data_pengajuan['nama_kk'];
         $nama_akte_dokumen = $data_pengajuan['nama_akte_dokumen'];
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
-        $tanggal_pengajuan = $data_pengajuan['tanggal_pengajuan'];
+        $tanggal_acc = $data_pengajuan['tanggal_acc'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
     }
 
     // Membuat nama file sesuai format yang diinginkan
-    $nama_file = 'SKBN_' . $userData['nama'] . '_' . $tanggal_pengajuan . '.pdf';
+    $nama_file = 'SKBN_' . $userData['nama'] . '_' . $tanggal_acc . '.pdf';
 
     // membuat pdf
     $pdf = new FPDF('P', 'mm', 'A4');
@@ -246,10 +246,10 @@
     $tempat = 'Bulak, ';
 
     $bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    $tanggal_pengajuan_array = explode('-', $tanggal_pengajuan);
-    $tanggal_pengajuan_indo = $tanggal_pengajuan_array[2] . ' ' . $bulan[(int)$tanggal_pengajuan_array[1]] . ' ' . $tanggal_pengajuan_array[0];
+    $tanggal_acc_array = explode('-', $tanggal_acc);
+    $tanggal_acc_indo = $tanggal_acc_array[2] . ' ' . $bulan[(int)$tanggal_acc_array[1]] . ' ' . $tanggal_acc_array[0];
 
-    $pdf->MultiCell(145, 7, $tempat . $tanggal_pengajuan_indo, 0, 'R');
+    $pdf->MultiCell(145, 7, $tempat . $tanggal_acc_indo, 0, 'R');
 
     // kuwu
     $pdf->SetFont('Times', '', 12);
