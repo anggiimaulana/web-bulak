@@ -2,15 +2,37 @@
 // Menghubungkan ke database
 require '../config/db.php'; 
 
+// Mendapatkan kategori dan pencarian dari parameter GET
+$kategori = isset($_GET['kategori']) ? (int)$_GET['kategori'] : 0;
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+
 // Query untuk mengambil data pengajuan dengan join
 $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan, p.tanggal_pengajuan, p.status 
         FROM pengajuan p
         JOIN user u ON p.nik = u.nik
-        JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan order by id_pengajuan desc";
+        JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan";
+
+// Menambahkan kondisi filter kategori
+$conditions = [];
+if ($kategori > 0) {
+    $conditions[] = "p.id_kategori = $kategori";
+}
+
+// Menambahkan kondisi pencarian nama user
+if (!empty($search)) {
+    $conditions[] = "u.nama LIKE '%$search%'";
+}
+
+// Menggabungkan kondisi
+if (count($conditions) > 0) {
+    $sql .= " WHERE " . implode(' AND ', $conditions);
+}
+
+$sql .= " ORDER BY p.id_pengajuan DESC";
 $result = $conn->query($sql);
 ?>
 
-<?php include 'header.php' ?>
+<?php include 'header.php'; ?>
 <body>
 
     <!-- SIDEBAR -->
@@ -100,8 +122,30 @@ $result = $conn->query($sql);
                 <div class="order">
                     <div class="head">
                         <h3>Daftar Pengajuan</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-search'></i>
+                        <div class="filters">
+                            <a href="#" class="filter-toggle" id="filter-toggle"><i class="bx bx-filter"></i>Filter</a>
+                            <a href="#" class="search-toggle" id="search-toggle"><i class="bx bx-search"></i>Cari</a>
+                            <div class="filter-menu" id="filter-menu" style="display: none;">
+                                <form method="GET" action="pengajuan_user.php">
+                                    <select name="kategori">
+                                        <option value="">Semua</option>
+                                        <option value="1" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 1) echo 'selected'; ?>>Surat Keterangan Usaha</option>
+                                        <option value="2" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 2) echo 'selected'; ?>>Surat Keterangan Beda Nama</option>
+                                        <option value="3" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 3) echo 'selected'; ?>>Surat Keterangan Tidak Mampu</option>
+                                        <option value="4" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 4) echo 'selected'; ?>>Surat Keterangan Penduduk Sementara</option>
+                                        <option value="5" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 5) echo 'selected'; ?>>Surat Keterangan Domisili</option>
+                                        <option value="6" <?php if (isset($_GET['kategori']) && $_GET['kategori'] == 6) echo 'selected'; ?>>Surat Keterangan</option>
+                                    </select>
+                                    <button type="submit">Filter</button>
+                                </form>
+                            </div>
+                            <div class="search-menu" id="search-menu" style="display: none;">
+                                <form method="GET" action="pengajuan_user.php">
+                                    <input type="text" name="search" placeholder="Cari Nama User" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                                    <button type="submit">Cari</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <table>
                         <thead>
@@ -135,11 +179,11 @@ $result = $conn->query($sql);
                                     echo "<td>" . htmlspecialchars($row['jenis_pengajuan']) . "</td>";
                                     echo "<td>" . date('d-m-Y', strtotime($row['tanggal_pengajuan'])) . "</td>";
                                     echo "<td><span class='status " . htmlspecialchars($statusClass) . "'>" . htmlspecialchars(ucfirst($row['status'])) . "</span></td>";
-                                    echo "<td><a href='edit-pengajuan.php?id=" . $row['id_pengajuan'] . "' class='status edit'>Edit</a></td>";
+                                    echo "<td><a href='edit-pengajuan.php?id=" . $row['id_pengajuan'] . "' class='status edit'>Tinjau</a></td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='6'>No data available</td></tr>";
+                                echo "<tr><td colspan='6'>Tidak ada data yang tersedia!</td></tr>";
                             }
                             ?>
                         </tbody>
@@ -149,5 +193,39 @@ $result = $conn->query($sql);
         </main>
     </section>
     <script src="../user/js/script.js"></script>
+    <script>
+        // JavaScript untuk menangani klik pada ikon filter dan pencarian
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.getElementById('filter-toggle');
+            const searchToggle = document.getElementById('search-toggle');
+            const filterMenu = document.getElementById('filter-menu');
+            const searchMenu = document.getElementById('search-menu');
+
+            filterToggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+                searchMenu.style.display = 'none'; // Sembunyikan menu pencarian
+            });
+
+            searchToggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                searchMenu.style.display = searchMenu.style.display === 'none' ? 'block' : 'none';
+                searchToggle.style.display = 'none'; // Sembunyikan ikon pencarian
+                filterMenu.style.display = 'none'; // Sembunyikan menu filter
+            });
+
+            // Menutup menu jika klik di luar menu
+            document.addEventListener('click', function(event) {
+                if (!filterMenu.contains(event.target) && !filterToggle.contains(event.target)) {
+                    filterMenu.style.display = 'none';
+                }
+
+                if (!searchMenu.contains(event.target) && !searchToggle.contains(event.target)) {
+                    searchMenu.style.display = 'none';
+                    searchToggle.style.display = 'block'; // Tampilkan kembali ikon pencarian
+                }
+            });
+        });
+    </script>
 </body>
 </html>
