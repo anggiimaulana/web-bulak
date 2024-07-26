@@ -1,6 +1,12 @@
 <?php 
-// Menghubungkan ke database
-require '../config/db.php'; 
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
 
 // Check for reset parameter
 if (isset($_GET['reset'])) {
@@ -145,7 +151,7 @@ $result = $conn->query($sql);
                                         <option value="5" <?php if ($kategori == 5) echo 'selected';?>>Surat Keterangan Domisili</option>
                                         <option value="6" <?php if ($kategori == 6) echo 'selected';?>>Surat Keterangan</option>
                                     </select>
-                                    <h5>Status</h5>
+                                    <h5 style="margin-top: 10px;">Status</h5>
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="" <?php if ($status == '') echo 'selected';?>>Semua</option>
                                         <option value="Acc" <?php if ($status == 'Acc') echo 'selected';?>>Acc</option>

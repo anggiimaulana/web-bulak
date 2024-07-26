@@ -1,4 +1,12 @@
-<?php include 'header.php' ?>
+<?php include 'header.php';
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}?>
 <body>
 
     <!-- SIDEBAR -->

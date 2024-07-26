@@ -1,8 +1,17 @@
 <?php
-    include '../config/db.php';
-    $sql = "SELECT id_kritik_saran, nama, email, isi, status FROM kritik_saran";
-    $result = $conn->query($sql);
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
+
+$sql = "SELECT id_kritik_saran, nama, email, isi, status FROM kritik_saran";
+$result = $conn->query($sql);
 ?>
+
 <?php include 'header.php' ?>
 <body>
     <!-- SIDEBAR -->
@@ -90,7 +99,7 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Daftar kritik Dan Saran</h3>
+                        <h3>Daftar Kritik Dan Saran</h3>
                     </div>
                     <table>
                         <thead>
@@ -108,15 +117,21 @@
                             if ($result->num_rows > 0) {
                                 $no = 1;
                                 while($row = $result->fetch_assoc()) {
-                                    $status_class = ($row["status"] == "publish") ? "publish" : "pending";
-                                    echo "<tr class='status $status_class'>";
+                                    $statusClass = ($row['status'] == 'publish') ? 'completed' : 'pending';
+
+                                    // Memotong isi jika lebih dari 50 karakter
+                                    $isi = htmlspecialchars($row["isi"]);
+                                    if (strlen($isi) > 50) {
+                                        $isi = substr($isi, 0, 50) . '...';
+                                    }
+
+                                    echo "<tr>";
                                     echo "<td>" . $no++ . "</td>";
-                                    echo "<td><p>" . $row["nama"] . "</p></td>";
-                                    echo "<td><p>" . $row["email"] . "</p></td>";
-                                    echo "<td><p>" . $row["isi"] . "</p></td>";
-									$statusClass = $row['status'] == 'publish' ? 'completed' : 'pending' ;
-									echo "<td><span class='status " . $statusClass . "'>" . $row['status'] . "</span></td>";
-                                    echo "<td><a href='edit_kritik_saran.php?id=" . $row["id_kritik_saran"] . "' class='status edit'>Edit</a></td>";
+                                    echo "<td><p>" . htmlspecialchars($row["nama"]) . "</p></td>";
+                                    echo "<td><p>" . htmlspecialchars($row["email"]) . "</p></td>";
+                                    echo "<td><p>" . $isi . "</p></td>";
+                                    echo "<td><span class='status " . $statusClass . "'>" . htmlspecialchars($row['status']) . "</span></td>";
+                                    echo "<td><a href='edit_kritik_saran.php?id=" . htmlspecialchars($row["id_kritik_saran"]) . "' class='status edit'>Edit</a></td>";
                                     echo "</tr>";
                                 }
                             } else {

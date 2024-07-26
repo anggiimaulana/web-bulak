@@ -1,5 +1,12 @@
 <?php
-include '../config/db.php';
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
 
 $row = null; // Inisialisasi variabel
 

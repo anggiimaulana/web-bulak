@@ -1,6 +1,12 @@
 <?php
-// Menghubungkan koneksi.php
-include '../config/db.php';
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
 
 // Query untuk menghitung jumlah artikel
 $sql = "SELECT COUNT(*) as total_artikel FROM artikel";
@@ -15,7 +21,7 @@ if ($result->num_rows > 0) {
     $total_artikel = 0;
 }
 
-// Query untuk menghitung jumlah artikel
+// Query untuk menghitung jumlah pengajuan
 $sql = "SELECT COUNT(*) as total_pengajuan FROM pengajuan";
 $result = $conn->query($sql);
 
@@ -180,11 +186,19 @@ $result_users = $conn->query($sql_users);
                             if ($result_users->num_rows > 0) {
                                 $no = 1;
                                 while($row = $result_users->fetch_assoc()) {
+                                    $alamat = isset($row['alamat']) ? $row['alamat'] : '';
+
+                                    // Potong alamat jika lebih dari 50 karakter
+                                    if (strlen($alamat) > 50) {
+                                        $alamat = substr($alamat, 0, 50) . '...';
+                                    }
+
+                                    echo "<tr>";
                                     echo "<td>" . $no++ . "</td>";
-                                    echo "<td><p>" . $row["nama"] . "</p></td>";
-                                    echo "<td>" . $row["nik"] . "</td>";
-                                    echo "<td>" . $row["pekerjaan"] . "</td>";
-                                    echo "<td>" . $row["alamat"] . "</td>";
+                                    echo "<td><p>" . htmlspecialchars($row["nama"]) . "</p></td>";
+                                    echo "<td>" . htmlspecialchars($row["nik"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row["pekerjaan"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($alamat) . "</td>";
                                     echo "</tr>";
                                 }
                             } else {

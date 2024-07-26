@@ -1,4 +1,13 @@
-<?php include 'header.php' ?>
+<?php include 'header.php';
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
+?>
 <body>
 
     <!-- SIDEBAR -->
@@ -74,14 +83,14 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Daftar Akun</h1>
+                    <h1>Daftar Akun User</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="daftar.html">User</a>
+                            <a href="daftar.html">Admin</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
-                            <a href="#">Daftar</a>
+                            <a class="active" href="#">Tambah Akun User</a>
                         </li>
                     </ul>
                 </div>

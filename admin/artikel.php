@@ -1,6 +1,12 @@
 <?php
-// Menghubungkan koneksi.php
-include '../config/db.php';
+session_start(); // Memulai sesi
+require '../config/db.php';
+
+// Mengecek apakah pengguna sudah login
+if (!isset($_SESSION['nip'])) {
+    header('Location: ../login-admin.php');
+    exit();
+}
 
 // Query untuk mengambil data artikel
 $sql = "SELECT id_artikel, gambar, judul_artikel, isi_artikel, tanggal, status FROM artikel ORDER BY id_artikel DESC";
