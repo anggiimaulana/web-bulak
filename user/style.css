@@ -474,6 +474,7 @@ body {
 	font-size: 13px;
 	margin-left: auto;
 	width: 120px;
+	cursor: pointer;
 }
 #content main .table-data .head a {
 	color: var(--light);
@@ -744,6 +745,32 @@ body {
 }
 /* form pengajuan */
 
-/* modals */
+/* Style untuk filter dan search */
+.filter-menu, .search-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+	margin-right: 10px;
+}
 
-/* modals */
+.filter-menu select, .search-menu input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+	border-radius: 10px;
+}
+
+.search-menu button .pencarian {
+    padding: 8px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.search-menu button .pencarian:hover {
+    background-color: #3e8e41;
+}
