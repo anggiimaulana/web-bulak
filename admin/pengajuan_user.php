@@ -7,30 +7,35 @@ if (isset($_GET['reset'])) {
     $kategori = 0;
     $search = '';
 } else {
-    // Get filter and search parameters
+    // / Get filter and search parameters
     $kategori = isset($_GET['kategori']) ? (int)$_GET['kategori'] : 0;
+    $status = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+    
+    // Query to fetch data
+    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan, p.tanggal_pengajuan, p.status 
+            FROM pengajuan p
+            JOIN user u ON p.nik = u.nik
+            JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan";
+    
+    // Add conditions for filter and search
+    if ($kategori > 0) {
+        $sql .= " WHERE p.id_kategori = $kategori";
+    } else {
+        $sql .= " WHERE 1=1"; // to avoid syntax error
+    }
+    
+    if (!empty($status)) {
+        $sql .= " AND p.status = '$status'";
+    }
+    
+    if (!empty($search)) {
+        $sql .= " AND UPPER(u.nama) LIKE UPPER('%$search%')";
+    }
 }
-
-// Query to fetch data
-$sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan, p.tanggal_pengajuan, p.status 
-        FROM pengajuan p
-        JOIN user u ON p.nik = u.nik
-        JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan";
-
-// Add conditions for filter and search
-if ($kategori > 0) {
-    $sql .= " WHERE p.id_kategori = $kategori";
-} else {
-    $sql .= " WHERE 1=1"; // to avoid syntax error
-}
-
-if (!empty($search)) {
-    $sql .= " AND UPPER(u.nama) LIKE UPPER('%$search%')";
-}
-
-$sql .= " ORDER BY p.id_pengajuan DESC";
-$result = $conn->query($sql);
+    
+    $sql .= " ORDER BY p.id_pengajuan DESC";
+    $result = $conn->query($sql);
 ?>
 
 <?php include 'header.php'; ?>
@@ -130,6 +135,7 @@ $result = $conn->query($sql);
                             </a>
                             <div class="filter-menu" id="filter-menu">
                                 <form method="GET" action="pengajuan_user.php">
+                                <h5>Kategori</h5>
                                     <select name="kategori" onchange="this.form.submit()">
                                         <option value="" <?php if ($kategori == 0) echo 'selected';?>>Semua</option>
                                         <option value="1" <?php if ($kategori == 1) echo 'selected';?>>Surat Keterangan Usaha</option>
@@ -139,13 +145,19 @@ $result = $conn->query($sql);
                                         <option value="5" <?php if ($kategori == 5) echo 'selected';?>>Surat Keterangan Domisili</option>
                                         <option value="6" <?php if ($kategori == 6) echo 'selected';?>>Surat Keterangan</option>
                                     </select>
+                                <h5>Status</h5>
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="" <?php if ($status == '') echo 'selected';?>>Semua</option>
+                                        <option value="Acc" <?php if ($status == 'Acc') echo 'selected';?>>Acc</option>
+                                        <option value="Pending" <?php if ($status == 'Pending') echo 'selected';?>>Pending</option>
+                                    </select>
                                 </form>
                             </div>
                             <a href="#" class="search-toggle" id="search-toggle">
                                 <i class="bx bx-search"></i> Cari
                             </a>
                             <div class="search-menu" id="search-menu">
-                                <form method="GET" action="pengajuan_user.php" class="search-form">
+                                <form method="GET" action="pengajuan_user.php" class="search-form" >
                                     <input type="text" name="search" placeholder="Cari Nama User" value="<?php echo htmlspecialchars($search);?>">
                                     <button class="pencarian" type="submit">Cari</button>
                                 </form>

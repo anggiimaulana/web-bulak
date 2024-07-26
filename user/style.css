@@ -485,7 +485,7 @@ body {
 }
 
 #content main .table-data .head a i {
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
 #content main .table-data .head button:hover {
@@ -746,31 +746,51 @@ body {
 /* form pengajuan */
 
 /* Style untuk filter dan search */
+.filters a {
+	margin-right: 10px;
+}
+
 .filter-menu, .search-menu {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid var(--light-blue);
 	margin-right: 10px;
+	margin-top: 10px;
+}
+
+@media screen and (max-width: 756px) {
+	.filter-menu, .search-menu {
+		position:static;
+	}
+
+	.filters {
+		display: flex;
+		justify-content: flex-start; /* atau flex-end untuk rata kanan */
+	}
+	
+	.filters a {
+		display: flex;
+		align-items: center;
+		margin: 10px;
+		text-align: left; /* atau right untuk teks rata kanan */
+	}
+	
 }
 
 .filter-menu select, .search-menu input[type="text"] {
-    width: 100%;
+    width: 160px;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--light-blue);
 	border-radius: 10px;
 }
 
-.search-menu button .pencarian {
-    padding: 8px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+.filter-menu select {
+	cursor: pointer;
 }
 
-.search-menu button .pencarian:hover {
-    background-color: #3e8e41;
+.search-menu input[type="text"]:focus, .filter-menu select:focus {
+    border: 1px solid var(--light-blue);
+    outline: none; 
 }

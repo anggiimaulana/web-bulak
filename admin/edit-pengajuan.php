@@ -132,26 +132,36 @@ $conn->close();
                     <div class="head">
                         <h3>Form Pengajuan</h3>
                     </div>
-                    <form action="edit-pengajuan.php" method="POST">
-                        <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
+                    <div class="formulir-pengajuan" id="pengajuanForm">
+            <form action="edit-pengajuan.php" method="POST">
+                <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
 
-                        <label for="nama">Nama</label>
-                        <input type="text" id="nama" value="<?php echo htmlspecialchars($row['nama_user'] ?? ''); ?>" ><br><br>
+                <div class="data-user">
+                    <label for="nama">Nama</label>
+                    <input type="text" id="nama" value="<?php echo htmlspecialchars($row['nama_user'] ?? ''); ?>" required>
+                </div>
 
-                        <label for="jenis_pengajuan">Kategori</label>
-                        <input type="text" id="jenis_pengajuan" value="<?php echo htmlspecialchars($row['kategori'] ?? ''); ?>" ><br><br>
+                <div class="data-user">
+                    <label for="jenis_pengajuan">Kategori</label>
+                    <input type="text" id="jenis_pengajuan" value="<?php echo htmlspecialchars($row['kategori'] ?? ''); ?>" required>
+                </div>
 
-                        <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
-                        <input type="text" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" ><br><br>
+                <div class="data-user">
+                    <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
+                    <input type="text" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" required>
+                </div>
 
-                        <label for="status">Status</label>
-                        <select id="status" name="status" required>
-                            <option value="Acc" <?php echo ($row['status'] ?? '') === 'Acc' ? 'selected' : ''; ?>>Acc</option>
-                            <option value="Pending" <?php echo ($row['status'] ?? '') === 'Pending' ? 'selected' : ''; ?>>Pending</option>
-                        </select><br><br>
+                <div class="data-user">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="Acc" <?php echo ($row['status'] ?? '') === 'Acc' ? 'selected' : ''; ?>>Acc</option>
+                        <option value="Pending" <?php echo ($row['status'] ?? '') === 'Pending' ? 'selected' : ''; ?>>Pending</option>
+                    </select>
+                </div>
 
-                        <button type="submit">Update</button>
-                    </form>
+                <button type="submit">Update</button>
+            </form>
+        </div>
                 </div>
             </div>
         </main>
