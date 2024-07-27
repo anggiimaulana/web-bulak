@@ -198,6 +198,32 @@ $result = $conn->query($sql);
                                     } else {
                                         $statusClass = 'process'; // Kelas CSS default untuk status lainnya
                                     }
+
+                                    // Menentukan URL berdasarkan jenis pengajuan
+                                    $url = 'pengajuan/';
+                                    switch ($row['jenis_pengajuan']) {
+                                        case 'Surat Keterangan Usaha':
+                                            $url .= 'sku.php';
+                                            break;
+                                        case 'Surat Keterangan Beda Nama':
+                                            $url .= 'skbn.php';
+                                            break;
+                                        case 'Surat Keterangan Tidak Mampu':
+                                            $url .= 'sktm.php';
+                                            break;
+                                        case 'Surat Keterangan Penduduk Sementara':
+                                            $url .= 'skps.php';
+                                            break;
+                                        case 'Surat Keterangan Domisili':
+                                            $url .= 'skd.php';
+                                            break;
+                                        case 'Surat Keterangan':
+                                            $url .= 'sk.php';
+                                            break;
+                                        default:
+                                            $url .= 'sk.php'; // Default URL jika tidak ada yang sesuai
+                                    }
+
                                     echo "<tr>";
                                     echo "<td>" . $no++ . "</td>";
                                     echo "<td><p>" . htmlspecialchars($row['nama_user']) . "</p></td>";
@@ -205,7 +231,7 @@ $result = $conn->query($sql);
                                     echo "<td>" . date('d-m-Y', strtotime($row['tanggal_pengajuan'])) . "</td>";
                                     echo "<td>" . (!empty($row['tanggal_acc']) ? date('d-m-Y', strtotime($row['tanggal_acc'])) : '-') . "</td>";
                                     echo "<td><span class='status " . htmlspecialchars($statusClass) . "'>" . htmlspecialchars(ucfirst($row['status'])) . "</span></td>";
-                                    echo "<td><a href='edit-pengajuan.php?id=" . $row['id_pengajuan'] . "' class='status edit'>Tinjau</a></td>";
+                                    echo "<td><a href='" . $url . "?id=" . $row['id_pengajuan'] . "' class='status edit'>Tinjau</a></td>";
                                     echo "</tr>";
                                 }
                             } else {

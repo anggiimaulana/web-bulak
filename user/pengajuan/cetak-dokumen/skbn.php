@@ -262,8 +262,6 @@
     $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 15);
     $nama_kuwu = 'SURADI BUDIYANTO';
     $pdf->MultiCell(150, 7, $nama_kuwu, 0, 'R');
-    $pdf->SetLineWidth(0); // Ketebalan garis (dalam mm)
-    $pdf->Line($textX + 119, $textY + 265, $textX + 68 + 7, $textY + 265); // Garis bawah sepanjang teks (dengan spasi tambahan)
 
     ob_clean();
     flush();

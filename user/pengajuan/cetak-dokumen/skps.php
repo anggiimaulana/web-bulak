@@ -201,13 +201,9 @@
     $pdf->SetFont('Times', 'B', 12);
     $pdf->SetXY($startX, $startY);
     $pdf->Cell(80, 7, $userData['nama'], 0, 0, 'L'); // Teks Label
-    $pdf->SetLineWidth(0); // Ketebalan garis (dalam mm)
-    $pdf->Line($textX - 20, $textY + 240, $textX + 20 + 8, $textY + 240); // Garis bawah sepanjang teks (dengan spasi tambahan)
     
     $pdf->SetFont('Times', 'B', 12);
     $pdf->Cell(0, 7, 'SURADI BUDIYANTO', 0, 1, 'L'); // Data
-    $pdf->SetLineWidth(0); // Ketebalan garis (dalam mm)
-    $pdf->Line($textX + 117, $textY + 240, $textX + 60 + 5, $textY + 240); // Garis bawah sepanjang teks (dengan spasi tambahan)
 
     // // ttd
     // $pdf->SetFont('Times', 'B', 12);

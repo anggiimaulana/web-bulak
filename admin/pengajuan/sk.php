@@ -13,7 +13,7 @@ $row = null; // Inisialisasi variabel
 // Ambil id dari parameter GET
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan AS kategori, p.tanggal_pengajuan, p.nama_kk, p.nama_akte_dokumen, p.status 
+    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan AS kategori, p.tanggal_pengajuan, u.status_pernikahan as status_pernikahan, p.status 
             FROM pengajuan p
             JOIN user u ON p.nik = u.nik
             JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan
@@ -160,19 +160,19 @@ $conn->close();
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Pengajuan Surat Keterangan Beda Nama</h1>
+                    <h1>Pengajuan Surat Keterangan</h1>
                     <ul class="breadcrumb">
                         <li><a href="index.php">Admin</a></li>
                         <li><i class='bx bx-chevron-right'></i></li>
-                        <li><a class="active" href="pengajuan_user.php">SKBN</a></li>
+                        <li><a class="active" href="pengajuan_user.php">SK</a></li>
                     </ul>
                 </div>
             </div>
             <div class="table-data">
                 <div class="order">
-                    <div class="formulir-pengajuan" id="pengajuanForm">
+                        <div class="formulir-pengajuan" id="pengajuanForm">
                         <h3 style="margin-bottom:10px; font-size:22px; font-weight: 600;">Form Pengajuan</h3>
-                        <form action="skbn.php" method="POST">
+                        <form action="sk.php" method="POST">
                             <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
 
                             <div class="form-row">
@@ -190,20 +190,16 @@ $conn->close();
                                 </div>
                             </div>
 
-                            <h3 style="margin-bottom:10px; font-size:20px; font-weight: 600;">Menyatakan Bahwa: </h3>
+                            <h3 style="margin-bottom:10px; font-size:20px; font-weight: 600;">Mengajukan Usaha: </h3>
 
                             <div class="form-row">
                                 <div class="form-column">
                                     <div class="data-user">
-                                        <label for="nama_kk">Nama di Kartu Keluarga</label>
-                                        <input type="text" id="nama_kk" value="<?php echo htmlspecialchars($row['nama_kk'] ?? ''); ?>" disabled>
+                                        <label for="status_pernikahan">Status Pernikahan</label>
+                                        <input type="text" id="status_pernikahan" value="<?php echo htmlspecialchars($row['status_pernikahan'] ?? ''); ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-column">
-                                    <div class="data-user">
-                                        <label for="nama_akte_dokumen">Nama di Akte atau Dokumen Lainnya</label>
-                                        <input type="text" id="nama_akte_dokumen" value="<?php echo htmlspecialchars($row['nama_akte_dokumen'] ?? ''); ?>" disabled>
-                                    </div>
                                     <div class="data-user">
                                         <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
                                         <input type="date" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" disabled>

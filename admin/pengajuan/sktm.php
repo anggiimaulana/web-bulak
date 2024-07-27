@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssi", $status, $tanggal_acc, $id);
 
     if ($stmt->execute()) {
-        header("Location: pengajuan_user.php");
+        header("Location: ../pengajuan_user.php");
         exit;
     } else {
         echo "Error updating record: " . htmlspecialchars($conn->error);
@@ -172,7 +172,7 @@ $conn->close();
                 <div class="order">
                         <div class="formulir-pengajuan" id="pengajuanForm">
                         <h3 style="margin-bottom:10px; font-size:22px; font-weight: 600;">Form Pengajuan</h3>
-                        <form action="edit-pengajuan.php" method="POST">
+                        <form action="sktm.php" method="POST">
                             <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
 
                             <div class="form-row">
