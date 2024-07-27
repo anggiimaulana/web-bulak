@@ -459,7 +459,7 @@ body {
 	grid-gap: 16px;
 	margin-bottom: 24px;
 }
-#content main .table-data .head h3 {
+#content main .table-data .head h3{
 	margin-right: auto;
 	font-size: 24px;
 	font-weight: 600;

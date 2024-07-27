@@ -125,7 +125,7 @@ $userData = mysqli_fetch_assoc($result);
                                     <input type="date" name="tgl_pengajuan" id="tgl_pengajuan" required>
                                 </div>
                                 <div class="data-user">
-                                    <label for="keterangan_tidak_mampu">Keterangan Tidak Mampu</label>
+                                    <label for="keterangan_tidak_mampu">Keterangan</label>
                                     <input type="text" name="keterangan_tidak_mampu" id="keterangan_tidak_mampu" required>
                                 </div>
                             </div>
