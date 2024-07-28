@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id_kritik_saran"];
     $nama = $_POST["nama"];
     $email = $_POST["email"];
-    $kritik_dan_saran = $_POST["kritik_dan_saran"];
+    $kritik_dan_saran = $_POST["kritik_saran"];
     $status = $_POST["status"];
 
     $sql = "UPDATE kritik_saran SET nama='$nama', email='$email', isi='$kritik_dan_saran', status='$status' WHERE id_kritik_saran=$id";
@@ -127,26 +127,46 @@ $conn->close();
             </div>
             <div class="table-data">
                 <div class="order">
-                    <div class="head">
-                        <h3>Form Edit kritik Dan Saran</h3>
+                    <div class="formulir-pengajuan" id="pengajuanForm">
+                        <div class="head">
+                            <h3>Form Edit Kritik Dan Saran</h3>
+                        </div>
+                        <form action="edit_kritik_saran.php" method="POST">
+                            <input type="hidden" name="id_kritik_saran" value="<?php echo $row['id_kritik_saran']; ?>">
+                            <div class="form-row">
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="nama">Nama</label>
+                                        <input type="text" id="nama" name="nama" value="<?php echo $row['nama']; ?>" required>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="kritik_saran">Kritik dan Saran</label>
+                                        <textarea name="kritik_saran" id="kritik_saran" required><?php echo $row['isi']; ?></textarea>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="status">Status:</label>
+                                        <select id="status" name="status" required>
+                                            <option value="Dibaca" <?php if ($row['status'] == 'Dibaca') echo 'selected'; ?>>Dibaca</option>
+                                            <option value="Belum Dibaca" <?php if ($row['status'] == 'Belum Dibaca') echo 'selected'; ?>>Belum Dibaca</option>
+                                        </select><br><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">Update</button>
+                        </form>
+                        <div id="notification" style="display: none; color: red;">
+                            Harap isi semua kolom yang diperlukan!
+                        </div>
                     </div>
-    <form action="edit_kritik_saran.php" method="POST">
-        <input type="hidden" name="id_kritik_saran" value="<?php echo $row['id_kritik_saran']; ?>">
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" value="<?php echo $row['nama']; ?>" required><br><br>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="<?php echo $row['email']; ?>" required><br><br>
-        <label for="kritik_dan_saran">Kritik dan Saran:</label><br>
-        <textarea id="kritik_dan_saran" name="kritik_dan_saran" rows="4" cols="50" required><?php echo $row['isi']; ?></textarea><br><br>
-        <label for="status">Status:</label>
-        <select id="status" name="status" required>
-            <option value="publish" <?php if ($row['status'] == 'publish') echo 'selected'; ?>>Publish</option>
-            <option value="pending" <?php if ($row['status'] == 'pending') echo 'selected'; ?>>Pending</option>
-        </select><br><br>
-        <button type="submit">Update</button>
-    </form>
-    </div>
-    </div>
+                </div>
+            </div>
+
         </main>
     </section>
     <    <script src="../user/js/script.js"></>

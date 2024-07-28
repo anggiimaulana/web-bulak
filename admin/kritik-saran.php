@@ -10,9 +10,9 @@ if (!isset($_SESSION['nip'])) {
 
 $sql = "SELECT id_kritik_saran, nama, email, isi, status FROM kritik_saran";
 $result = $conn->query($sql);
-?>
 
-<?php include 'header.php' ?>
+include 'header.php';
+?>
 <body>
     <!-- SIDEBAR -->
     <section id="sidebar">
@@ -23,31 +23,31 @@ $result = $conn->query($sql);
         <ul class="side-menu top">
             <li>
                 <a href="index.php">
-                    <i class='bx bxs-dashboard' ></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="artikel.php">
-                    <i class='bx bxs-doughnut-chart' ></i>
+                    <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Artikel</span>
                 </a>
             </li>
             <li>
                 <a href="pengajuan_user.php">
-                    <i class='bx bxs-file' ></i>
+                    <i class='bx bxs-file'></i>
                     <span class="text">Pengajuan User</span>
                 </a>
             </li>
             <li class="active">
                 <a href="#">
-                    <i class='bx bxl-discord' ></i>
+                    <i class='bx bxl-discord'></i>
                     <span class="text">Kritik Dan Saran</span>
                 </a>
             </li>
             <li>
                 <a href="tambah_user.php">
-                    <i class='bx bxs-user-plus' ></i>
+                    <i class='bx bxs-user-plus'></i>
                     <span class="text">Tambah User</span>
                 </a>
             </li>
@@ -55,19 +55,19 @@ $result = $conn->query($sql);
         <ul class="side-menu">
             <li>
                 <a href="tambah_admin.php">
-                    <i class='bx bxs-group' ></i>
+                    <i class='bx bxs-group'></i>
                     <span class="text">Tambah Admin</span>
                 </a>
             </li>
             <li>
                 <a href="profile_akun.php">
-                    <i class='bx bxs-user' ></i>
+                    <i class='bx bxs-user'></i>
                     <span class="text">Profile Akun</span>
                 </a>
             </li>
             <li>
                 <a href="#" class="logout">
-                    <i class='bx bxs-log-out-circle' ></i>
+                    <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
@@ -79,7 +79,7 @@ $result = $conn->query($sql);
     <section id="content">
         <!-- NAVBAR -->
         <nav>
-            <i class='bx bx-menu' ></i>
+            <i class='bx bx-menu'></i>
             <input type="checkbox" id="switch-mode" hidden>
         </nav>
         <!-- NAVBAR -->
@@ -117,7 +117,7 @@ $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
                                 $no = 1;
                                 while($row = $result->fetch_assoc()) {
-                                    $statusClass = ($row['status'] == 'publish') ? 'completed' : 'pending';
+                                    $statusClass = ($row['status'] == 'Dibaca') ? 'completed' : 'pending';
 
                                     // Memotong isi jika lebih dari 50 karakter
                                     $isi = htmlspecialchars($row["isi"]);

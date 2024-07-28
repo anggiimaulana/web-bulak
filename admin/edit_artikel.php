@@ -152,45 +152,58 @@ $row = $result->fetch_assoc();
                 </div>
             </div>
             <div class="table-data">
-                <div class="order">
-                    <div class="head">
-                        <h3>Edit Artikel</h3>
-                    </div>
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        <input type="hidden" name="id_artikel" value="<?php echo $row['id_artikel']; ?>">
-                        <div>
+    <div class="order">
+        <div class="formulir-pengajuan" id="pengajuanForm">
+            <div class="head">
+                <h3>Edit Artikel</h3>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <input type="hidden" name="id_artikel" value="<?php echo $row['id_artikel']; ?>">
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="data-user">
                             <label for="judul_artikel">Judul Artikel:</label>
-                            <input type="text" id="judul_artikel" name="judul_artikel" value="<?php echo $row['judul_artikel']; ?>">
+                            <input type="text" id="judul_artikel" name="judul_artikel" value="<?php echo $row['judul_artikel']; ?>" required>
                         </div>
-                        <div>
-                            <label for="isi_artikel">Isi Artikel:</label>
-                            <textarea id="isi_artikel" name="isi_artikel"><?php echo $row['isi_artikel']; ?></textarea>
-                        </div>
-                        <div>
+                        <div class="data-user">
                             <label for="tanggal">Tanggal:</label>
-                            <input type="date" id="tanggal" name="tanggal" value="<?php echo $row['tanggal']; ?>">
+                            <input type="date" id="tanggal" name="tanggal" value="<?php echo $row['tanggal']; ?>" required>
                         </div>
-                        <div>
-                            <label for="gambar_lama">Gambar Saat Ini:</label><br>
-                            <img src="image/<?php echo $row['gambar']; ?>" alt="Gambar Saat Ini" style="width:150px;"><br>
-                            <input type="hidden" name="gambar_lama" value="<?php echo $row['gambar']; ?>">
-                            <span><?php echo $row['gambar']; ?></span>
+                    </div>
+                    <div class="form-column">
+                        <div class="data-user">
+                            <label for="isi_artikel">Isi Artikel:</label>
+                            <textarea id="isi_artikel" name="isi_artikel" required><?php echo $row['isi_artikel']; ?></textarea>
                         </div>
-                        <div>
+                    </div>
+                    <div class="form-column">
+                        <div class="data-user">
+                            <label for="gambar_lama">Gambar Saat Ini:</label>
+                            <img src="image/<?php echo $row['gambar']; ?>" alt="Gambar Saat Ini" style="width:150px;">
+                            <input type="hidden" name="gambar_lama" value="<?php echo $row['gambar']; ?>"> <br>
+                            <?php echo $row['gambar']; ?>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="data-user">
                             <label for="gambar_baru">Gambar Baru:</label>
                             <input type="file" id="gambar_baru" name="gambar_baru">
                         </div>
-                        <div>
+                        <div class="data-user">
                             <label for="status">Status:</label>
                             <select id="status" name="status">
                                 <option value="Publish" <?php if ($row['status'] == 'Publish') echo 'selected'; ?>>Publish</option>
                                 <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
                             </select>
                         </div>
-                        <button type="submit">Update Artikel</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <button type="submit">Update Artikel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
         </main>
         <!-- MAIN -->
     </section>

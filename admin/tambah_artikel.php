@@ -146,37 +146,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="table-data">
                 <div class="order">
-                    <div class="head">
-                        <h3>Tambah Artikel</h3>
+                    <div class="formulir-pengajuan" id="pengajuanForm">
+                        <div class="head">
+                            <h3>Tambah Artikel</h3>
+                        </div>
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="judul_artikel">Judul Artikel:</label>
+                                        <input type="text" id="judul_artikel" name="judul_artikel" required>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="tanggal">Tanggal:</label>
+                                        <input type="date" id="tanggal" name="tanggal" required>
+                                    </div>
+                                </div>
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="isi_artikel">Isi Artikel:</label>
+                                        <textarea id="isi_artikel" name="isi_artikel" required></textarea>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="gambar">Gambar:</label>
+                                        <input type="file" id="gambar" name="gambar" required>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="status">Status:</label>
+                                        <select id="status" name="status">
+                                            <option value="Publish">Publish</option>
+                                            <option value="Pending">Pending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">Tambah Artikel</button>
+                        </form>
                     </div>
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        <div>
-                            <label for="judul_artikel">Judul Artikel:</label>
-                            <input type="text" id="judul_artikel" name="judul_artikel" required>
-                        </div>
-                        <div>
-                            <label for="isi_artikel">Isi Artikel:</label>
-                            <textarea id="isi_artikel" name="isi_artikel" required></textarea>
-                        </div>
-                        <div>
-                            <label for="tanggal">Tanggal:</label>
-                            <input type="date" id="tanggal" name="tanggal" required>
-                        </div>
-                        <div>
-                            <label for="gambar">Gambar:</label>
-                            <input type="file" id="gambar" name="gambar" required>
-                        </div>
-                        <div>
-                            <label for="status">Status:</label>
-                            <select id="status" name="status">
-                                <option value="Publish">Publish</option>
-                                <option value="Pending">Pending</option>
-                            </select>
-                        </div>
-                        <button type="submit">Tambah Artikel</button>
-                    </form>
                 </div>
             </div>
+
         </main>
         <!-- MAIN -->
     </section>
