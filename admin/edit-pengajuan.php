@@ -100,7 +100,7 @@ $conn->close();
             </li>
             <li>
                 <a href="profile_akun.php">
-                    <i class='bx bxs-cog'></i>
+                    <i class='bx bxs-user'></i>
                     <span class="text">Profile Akun</span>
                 </a>
             </li>
