@@ -89,7 +89,7 @@ $conn->close();
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
-            <img src="../user/img/bulak.jpg" alt="bulak">
+            <img src="../../user/img/bulak.jpg" alt="bulak">
             <span style="margin-left: 10px;" class="text">Admin</span>
         </a>
         <ul class="side-menu top">
@@ -138,7 +138,7 @@ $conn->close();
                 </a>
             </li>
             <li>
-                <a href="#" class="logout">
+                <a href="../logout.php" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
