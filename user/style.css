@@ -565,8 +565,8 @@ body {
 	background: var(--hijau);
 	opacity: 0.75;
 }
-#content main .table-data .order table tr td .status.process {
-	background: var(--yellow);
+#content main .table-data .order table tr td .status.hapus {
+	background: var(--red);
 }
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);

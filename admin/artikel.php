@@ -145,6 +145,9 @@ $result = $conn->query($sql);
                                     echo "<td><span class='status " . $statusClass . "'>" . ($row['status'] == 'Publish' ? 'Publish' : 'Pending') . "</span></td>";
                                     echo "<td>
                                         <a href='edit_artikel.php?id_artikel=" . $row['id_artikel'] . "' class='status edit'>Edit</a>
+                                        <span>
+                                        <a href='proses/hapus-artikel.php?id_artikel=" . $row['id_artikel'] . "' class='status hapus' onclick='return confirm(\"Apakah Anda yakin ingin menghapus artikel ini?\")'>Hapus</a>
+                                        </span>
                                     </td>";
                                     echo "</tr>";
                                     $no++;
