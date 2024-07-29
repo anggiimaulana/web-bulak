@@ -96,6 +96,14 @@ body {
 	}
 }
 
+#sidebar .brand img {
+	margin: 5px;
+	min-width: 55px;
+	height: 55px;
+	display: flex;
+	justify-content: center;
+}
+
 #sidebar .brand .bx {
 	min-width: 60px;
 	display: flex;

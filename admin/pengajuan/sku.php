@@ -89,8 +89,8 @@ $conn->close();
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
-            <i class='bx bxs-smile'></i>
-            <span class="text">Administrator</span>
+            <img src="../user/img/bulak.jpg" alt="bulak">
+            <span style="margin-left: 10px;" class="text">Admin</span>
         </a>
         <ul class="side-menu top">
             <li>
