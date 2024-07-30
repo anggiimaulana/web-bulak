@@ -39,5 +39,3 @@ $_SESSION['nip'] = $nip;
 header('Location: ../admin/');
 exit();
 
-
-?>

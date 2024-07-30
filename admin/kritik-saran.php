@@ -148,5 +148,21 @@ include 'header.php';
     </section>
     <!-- CONTENT -->
     <script src="../user/js/script.js"></script>
+    <script>
+    // Check URL parameters for status
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+
+		if (status === 'success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Kritik dan saran sudah dibaca!',
+				text: '',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		}
+    </script>
 </body>
 </html>

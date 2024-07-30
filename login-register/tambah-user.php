@@ -47,4 +47,3 @@ if ($stmt->execute()) {
     header("Location: ../admin/tambah_user.php?status=error" . $stmt->error);
 }
 
-?>

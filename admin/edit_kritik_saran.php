@@ -32,14 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === true) {
         echo "Record updated successfully";
-        header("Location: kritik-saran.php");
+        header("Location: kritik-saran.php?status=success");
     } else {
-        echo "Error updating record: " . $conn->error;
+        header("Location: edit_kritik_saran.php?id=$id&status=failure");
     }
 }
 
 $conn->close();
 ?>
+
 
 <?php include 'header.php' ?>
 <body>
@@ -52,31 +53,31 @@ $conn->close();
         <ul class="side-menu top">
             <li>
                 <a href="index.php">
-                    <i class='bx bxs-dashboard' ></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="artikel.php">
-                    <i class='bx bxs-doughnut-chart' ></i>
+                    <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Artikel</span>
                 </a>
             </li>
             <li>
                 <a href="pengajuan_user.php">
-                    <i class='bx bxs-file' ></i>
+                    <i class='bx bxs-file'></i>
                     <span class="text">Pengajuan User</span>
                 </a>
             </li>
             <li class="active">
                 <a href="kritik-saran.php">
-                    <i class='bx bxl-discord' ></i>
+                    <i class='bx bxl-discord'></i>
                     <span class="text">Kritik Dan Saran</span>
                 </a>
             </li>
             <li>
                 <a href="tambah_user.php">
-                    <i class='bx bxs-user-plus' ></i>
+                    <i class='bx bxs-user-plus'></i>
                     <span class="text">Tambah User</span>
                 </a>
             </li>
@@ -84,19 +85,19 @@ $conn->close();
         <ul class="side-menu">
             <li>
                 <a href="tambah_admin.php">
-                    <i class='bx bxs-group' ></i>
+                    <i class='bx bxs-group'></i>
                     <span class="text">Tambah Admin</span>
                 </a>
             </li>
             <li>
                 <a href="profile_akun.php">
-                    <i class='bx bxs-user' ></i>
+                    <i class='bx bxs-user'></i>
                     <span class="text">Profile Akun</span>
                 </a>
             </li>
             <li>
                 <a href="logout.php" class="logout">
-                    <i class='bx bxs-log-out-circle' ></i>
+                    <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
@@ -108,7 +109,7 @@ $conn->close();
     <section id="content">
         <!-- NAVBAR -->
         <nav>
-            <i class='bx bx-menu' ></i>
+            <i class='bx bx-menu'></i>
             <input type="checkbox" id="switch-mode" hidden>
         </nav>
         <!-- NAVBAR -->
@@ -160,15 +161,32 @@ $conn->close();
                             </div>
                             <button type="submit">Update</button>
                         </form>
-                        <div id="notification" style="display: none; color: red;">
-                            Harap isi semua kolom yang diperlukan!
-                        </div>
+                        <?php
+                        if (isset($_GET['status']) && $_GET['status'] == 'failure') {
+                            echo "<div id='notification' style='color: red;'>Gagal mengupdate data, silakan coba lagi.</div>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
-
         </main>
     </section>
-    <    <script src="../user/js/script.js"></>
+    <script src="../user/js/script.js"></script>
+    <script>
+        // Check URL parameters for status
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+
+		if (status === 'failure') {
+			Swal.fire({
+				icon: 'error',
+				title: 'Gagal!',
+				text: 'Silahkan coba lagi',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		}
+    </script>
 </body>
 </html>
