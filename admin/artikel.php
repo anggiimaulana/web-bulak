@@ -191,20 +191,20 @@ $result = $conn->query($sql);
 					popup: 'swal2-popup'
 				}
 			});
-		} else if (status === 'error-nip-sudah-terdaftar') {
+		} else if (status === 'artikel-berhasil-dihapus') {
             Swal.fire({
-				icon: 'error',
-				title: 'NIP sudah digunakan!',
-				text: 'Silahkan ulangi kembali dengan NIP yang berbeda!.',
+				icon: 'success',
+				title: 'Artikel berhasil dihapus!',
+				text: '',
 				customClass: {
 					popup: 'swal2-popup'
 				}
 			});
-        } else if (status === 'error-nip-harus-angka') {
+        } else if (status === 'artikel-gagal-dihapus') {
             Swal.fire({
 				icon: 'error',
-				title: 'NIP harus menggunakan angka!',
-				text: 'Silahkan ulangi kembali penulisan NIP!.',
+				title: 'Artikel gagal dihapus!',
+				text: 'Silahkan ulangi kembali!.',
 				customClass: {
 					popup: 'swal2-popup'
 				}

@@ -35,10 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
             $gambar = $newFileName;
         } else {
-            echo 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
+            // Tetap di halaman yang sama jika gagal mengunggah gambar
+            header("Location: edit_artikel.php?id_artikel=$id_artikel&status=upload-gagal");
+            exit();
         }
     } else {
-        // If no new image is uploaded, use the old image
+        // Jika tidak ada gambar baru yang diunggah, gunakan gambar lama
         $gambar = $_POST['gambar_lama'];
     }
 
@@ -49,7 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: artikel.php?status=edit-artikel-success");
         exit;
     } else {
-        header("Location: #?status=edit-artikel-gagal");
+        // Tetap di halaman yang sama jika gagal mengupdate artikel
+        header("Location: edit_artikel.php?id_artikel=$id_artikel&status=edit-artikel-gagal");
+        exit();
     }
 }
 
@@ -59,6 +63,7 @@ $sql = "SELECT * FROM artikel WHERE id_artikel='$id_artikel'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
+
 <?php include 'header.php' ?>
 <body>
     <!-- SIDEBAR -->
@@ -152,79 +157,90 @@ $row = $result->fetch_assoc();
                 </div>
             </div>
             <div class="table-data">
-    <div class="order">
-        <div class="formulir-pengajuan" id="pengajuanForm">
-            <div class="head">
-                <h3>Edit Artikel</h3>
-            </div>
-            <form method="POST" action="" enctype="multipart/form-data">
-                <input type="hidden" name="id_artikel" value="<?php echo $row['id_artikel']; ?>">
-                <div class="form-row">
-                    <div class="form-column">
-                        <div class="data-user">
-                            <label for="judul_artikel">Judul Artikel:</label>
-                            <input type="text" id="judul_artikel" name="judul_artikel" value="<?php echo $row['judul_artikel']; ?>" required>
+                <div class="order">
+                    <div class="formulir-pengajuan" id="pengajuanForm">
+                        <div class="head">
+                            <h3>Edit Artikel</h3>
                         </div>
-                        <div class="data-user">
-                            <label for="tanggal">Tanggal:</label>
-                            <input type="date" id="tanggal" name="tanggal" value="<?php echo $row['tanggal']; ?>" required>
-                        </div>
-                    </div>
-                    <div class="form-column">
-                        <div class="data-user">
-                            <label for="isi_artikel">Isi Artikel:</label>
-                            <textarea id="isi_artikel" name="isi_artikel" required><?php echo $row['isi_artikel']; ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-column">
-                        <div class="data-user">
-                            <label for="gambar_lama">Gambar Saat Ini:</label>
-                            <img src="image/<?php echo $row['gambar']; ?>" alt="Gambar Saat Ini" style="width:150px;">
-                            <input type="hidden" name="gambar_lama" value="<?php echo $row['gambar']; ?>"> <br>
-                            <?php echo $row['gambar']; ?>
-                        </div>
-                    </div>
-                    <div class="form-column">
-                        <div class="data-user">
-                            <label for="gambar_baru">Gambar Baru:</label>
-                            <input type="file" id="gambar_baru" name="gambar_baru">
-                        </div>
-                        <div class="data-user">
-                            <label for="status">Status:</label>
-                            <select id="status" name="status">
-                                <option value="Publish" <?php if ($row['status'] == 'Publish') echo 'selected'; ?>>Publish</option>
-                                <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                            </select>
-                        </div>
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            <input type="hidden" name="id_artikel" value="<?php echo $row['id_artikel']; ?>">
+                            <div class="form-row">
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="judul_artikel">Judul Artikel:</label>
+                                        <input type="text" id="judul_artikel" name="judul_artikel" value="<?php echo $row['judul_artikel']; ?>" required>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="tanggal">Tanggal:</label>
+                                        <input type="date" id="tanggal" name="tanggal" value="<?php echo $row['tanggal']; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="isi_artikel">Isi Artikel:</label>
+                                        <textarea id="isi_artikel" name="isi_artikel" required><?php echo $row['isi_artikel']; ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="gambar_lama">Gambar Saat Ini:</label>
+                                        <img src="image/<?php echo $row['gambar']; ?>" alt="Gambar Saat Ini" style="width:150px;">
+                                        <input type="hidden" name="gambar_lama" value="<?php echo $row['gambar']; ?>"> <br>
+                                        <?php echo $row['gambar']; ?>
+                                    </div>
+                                </div>
+                                <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="gambar_baru">Gambar Baru:</label>
+                                        <input type="file" id="gambar_baru" name="gambar_baru">
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="status">Status:</label>
+                                        <select id="status" name="status">
+                                            <option value="Publish" <?php if ($row['status'] == 'Publish') echo 'selected'; ?>>Publish</option>
+                                            <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">Update Artikel</button>
+                        </form>
                     </div>
                 </div>
-                <button type="submit">Update Artikel</button>
-            </form>
-        </div>
-    </div>
-</div>
-
+            </div>
         </main>
         <!-- MAIN -->
     </section>
     <!-- CONTENT -->
 
     <script src="../user/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Check URL parameters for status
-		const urlParams = new URLSearchParams(window.location.search);
-		const status = urlParams.get('status');
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
 
-		if (status === 'edit-artikel-gagal') {
-			Swal.fire({
-				icon: 'error',
-				title: 'Edit artikel gagal!',
-				text: 'Silahkan coba lagi',
-				customClass: {
-					popup: 'swal2-popup'
-				}
-			});
-		}
+        if (status === 'edit-artikel-gagal') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Edit artikel gagal!',
+                text: 'Silahkan coba lagi',
+                customClass: {
+                    popup: 'swal2-popup'
+                }
+            });
+        } else if (status === 'upload-gagal') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal mengunggah gambar!',
+                text: 'Silahkan coba lagi',
+                customClass: {
+                    popup: 'swal2-popup'
+                }
+            });
+        }
     </script>
 </body>
+</html>
+
 </html>

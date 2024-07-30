@@ -33,19 +33,21 @@ if (isset($_GET['id_artikel'])) {
         $stmt->bind_param('i', $id_artikel);
         if ($stmt->execute()) {
             $_SESSION['message'] = "Artikel berhasil dihapus!";
+            header('Location: ../artikel.php?status=artikel-berhasil-dihapus');
         } else {
             $_SESSION['message'] = "Gagal menghapus artikel.";
+            header('Location: ../artikel.php?status=artikel-gagal-dihapus');
         }
     } else {
         $_SESSION['message'] = "Artikel tidak ditemukan.";
+        header('Location: ../artikel.php?status=artikel-tidak-ditemukan');
     }
 
     $stmt->close();
     $conn->close();
 } else {
     $_SESSION['message'] = "ID artikel tidak valid.";
+    header('Location: ../artikel.php?status=id-tidak-valid');
 }
 
-header('Location: ../artikel.php');
 exit();
-?>
