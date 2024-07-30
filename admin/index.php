@@ -50,6 +50,10 @@ if ($result_users_count->num_rows > 0) {
 // Query untuk mengambil data user
 $sql_users = "SELECT user_id, nama, nik, pekerjaan, alamat FROM user";
 $result_users = $conn->query($sql_users);
+
+// Query untuk mengambil data admin
+$sql_admins = "SELECT admin_id, nama, nip, pekerjaan, alamat FROM admin";
+$result_admins = $conn->query($sql_admins);
 ?>
 
 <?php include 'header.php' ?>
@@ -204,19 +208,60 @@ $result_users = $conn->query($sql_users);
                             } else {
                                 echo "<tr><td colspan='5'>No data available</td></tr>";
                             }
-                            $conn->close();
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Daftar Admin</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Pekerjaan</th>
+                                <th>Alamat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($result_admins->num_rows > 0) {
+                                $no = 1;
+                                while($row = $result_admins->fetch_assoc()) {
+                                    $alamat = isset($row['alamat']) ? $row['alamat'] : '';
+
+                                    // Potong alamat jika lebih dari 50 karakter
+                                    if (strlen($alamat) > 50) {
+                                        $alamat = substr($alamat, 0, 50) . '...';
+                                    }
+
+                                    echo "<tr>";
+                                    echo "<td>" . $no++ . "</td>";
+                                    echo "<td><p>" . htmlspecialchars($row["nama"]) . "</p></td>";
+                                    echo "<td>" . htmlspecialchars($row["nip"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row["pekerjaan"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($alamat) . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No data available</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </main>
         <!-- MAIN -->
     </section>
     <!-- CONTENT -->
     
-
     <script src="../user/js/script.js"></script>
 </body>
 </html>
