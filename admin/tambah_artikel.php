@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "INSERT INTO artikel (gambar, judul_artikel, isi_artikel, tanggal, status) VALUES ('$gambar', '$judul_artikel', '$isi_artikel', '$tanggal', '$status')";
 
             if ($conn->query($sql) === true) {
-                header("Location: artikel.php");
+                header("Location: artikel.php?status=tambah-artikel-success");
                 exit;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;

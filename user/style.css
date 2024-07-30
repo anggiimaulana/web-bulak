@@ -549,9 +549,10 @@ body {
     border-radius: 20px;
     font-weight: 700;
     display: inline-block; /* Ensure it respects width */
-    width: 75px;
+    width: 70px;
     text-align: center;
 }
+
 @media screen and (max-width: 756px) {
 	#content main .table-data .order table tr td .status,
 	#content main .table-data .order table tr td .status-download {

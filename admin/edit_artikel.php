@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "UPDATE artikel SET gambar='$gambar', judul_artikel='$judul_artikel', isi_artikel='$isi_artikel', tanggal='$tanggal', status='$status' WHERE id_artikel='$id_artikel'";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: artikel.php");
+        header("Location: artikel.php?status=edit-artikel-success");
         exit;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        header("Location: #?status=edit-artikel-gagal");
     }
 }
 
@@ -210,5 +210,21 @@ $row = $result->fetch_assoc();
     <!-- CONTENT -->
 
     <script src="../user/js/script.js"></script>
+    <script>
+        // Check URL parameters for status
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+
+		if (status === 'edit-artikel-gagal') {
+			Swal.fire({
+				icon: 'error',
+				title: 'Edit artikel gagal!',
+				text: 'Silahkan coba lagi',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		}
+    </script>
 </body>
 </html>

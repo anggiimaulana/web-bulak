@@ -129,7 +129,7 @@ $result = $conn->query($sql);
                                         $isi_artikel = substr($isi_artikel, 0, 50) . '...';
                                     }
 
-									$judul = $row['judul_artikel'];
+                                    $judul = $row['judul_artikel'];
                                     // Potong judul artikel jika lebih dari 50 karakter
                                     if (strlen($judul) > 50) {
                                         $judul = substr($judul, 0, 50) . '...';
@@ -158,6 +158,7 @@ $result = $conn->query($sql);
                             $conn->close();
                             ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -167,5 +168,49 @@ $result = $conn->query($sql);
     <!-- CONTENT -->
 
     <script src="../user/js/script.js"></script>
+    <script>
+        // Check URL parameters for status
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+
+		if (status === 'tambah-artikel-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Artikel berhasil ditambahkan!',
+				text: '',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'edit-artikel-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Artikel berhasil di edit!',
+				text: '',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'error-nip-sudah-terdaftar') {
+            Swal.fire({
+				icon: 'error',
+				title: 'NIP sudah digunakan!',
+				text: 'Silahkan ulangi kembali dengan NIP yang berbeda!.',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+        } else if (status === 'error-nip-harus-angka') {
+            Swal.fire({
+				icon: 'error',
+				title: 'NIP harus menggunakan angka!',
+				text: 'Silahkan ulangi kembali penulisan NIP!.',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+        }
+
+    </script>
 </body>
 </html>
