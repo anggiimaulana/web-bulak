@@ -275,6 +275,66 @@ $result = $conn->query($sql);
             }
         });
     });
+
+    // Check URL parameters for status
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('keterangan');
+
+		if (status === 'pengajuan-sk-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'pengajuan-skbn-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'pengajuan-skd-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'pengajuan-skps-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'pengajuan-sktm-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (status === 'pengajuan-sku-success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Status pengajuan berhasil di update!',
+				text: 'Silahkan menghubungi user agar segera mengunduh file!',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		}
     </script>
 </body>
 </html>

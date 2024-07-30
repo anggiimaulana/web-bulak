@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssi", $status, $tanggal_acc, $id);
 
     if ($stmt->execute()) {
-        header("Location: ../pengajuan_user.php");
+        header("Location: ../pengajuan_user.php?keterangan=pengajuan-skd-success");
         exit;
     } else {
         echo "Error updating record: " . htmlspecialchars($conn->error);
