@@ -191,4 +191,3 @@
     flush();
     // $pdf->Output();
     $pdf->Output('D', $nama_file);
-
