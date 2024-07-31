@@ -128,6 +128,8 @@ $conn->close();
                     <ul class="breadcrumb">
                         <li><a href="index.php">Admin</a></li>
                         <li><i class='bx bx-chevron-right'></i></li>
+                        <li><a href="index.php">Kritik dan Saran</a></li>
+                        <li><i class='bx bx-chevron-right'></i></li>
                         <li><a class="active" href="kritik-saran.php">Edit Kritik Dan Saran</a></li>
                     </ul>
                 </div>

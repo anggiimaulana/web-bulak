@@ -97,7 +97,7 @@ if (strlen($displayName) > 30) {
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
-                            <a class="active" href="#">Tambah Akun</a>
+                            <a class="active" href="#">Tambah Akun Admin</a>
                         </li>
                     </ul>
                 </div>
