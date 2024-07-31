@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Query untuk memperbarui data pengguna
     $sql = "UPDATE admin SET 
                 nama = '$nama', 
+                nip = '$nip',
                 tempat_lahir = '$tempat_lahir', 
                 tanggal_lahir = '$tanggal_lahir', 
                 jenis_kelamin = '$jenis_kelamin', 

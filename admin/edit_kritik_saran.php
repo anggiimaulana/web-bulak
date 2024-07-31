@@ -8,6 +8,18 @@ if (!isset($_SESSION['nip'])) {
     exit();
 }
 
+// Mendapatkan data pengguna dari tabel admin
+$nip = $_SESSION['nip'];
+$sql = "SELECT * FROM admin WHERE nip = '$nip'";
+$result = mysqli_query($conn, $sql);
+$userData = mysqli_fetch_assoc($result);
+
+// Membatasi panjang nama menjadi maksimal 15 karakter
+$displayName = $userData['nama'];
+if (strlen($displayName) > 30) {
+    $displayName = substr($displayName, 0, 30) . '...';
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM kritik_saran WHERE id_kritik_saran = $id";
@@ -46,10 +58,7 @@ $conn->close();
 <body>
     <!-- SIDEBAR -->
     <section id="sidebar">
-        <a href="#" class="brand">
-            <img src="../user/img/bulak.jpg" alt="bulak">
-            <span style="margin-left: 10px;" class="text">Admin</span>
-        </a>
+        <?php include 'brand.php' ?>
         <ul class="side-menu top">
             <li>
                 <a href="index.php">
@@ -108,10 +117,7 @@ $conn->close();
     <!-- CONTENT -->
     <section id="content">
         <!-- NAVBAR -->
-        <nav>
-            <i class='bx bx-menu'></i>
-            <input type="checkbox" id="switch-mode" hidden>
-        </nav>
+        <?php include 'navbar.php' ?>
         <!-- NAVBAR -->
 
         <!-- MAIN -->

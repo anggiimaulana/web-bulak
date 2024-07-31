@@ -97,11 +97,12 @@ body {
 }
 
 #sidebar .brand img {
-	margin: 5px;
-	min-width: 55px;
-	height: 55px;
+	margin: 12px;
+	min-width: 45px;
+	height: 45px;
 	display: flex;
 	justify-content: center;
+
 }
 
 #sidebar .brand .bx {
@@ -229,8 +230,9 @@ body {
 	color: var(--dark);
 }
 #content nav .nav-link {
-	font-size: 18px;
+	font-size: 15px;
 	transition: .3s ease;
+	font-weight: bold;
 }
 @media screen and (max-width: 500px) {
 	#content nav .nav-link {
