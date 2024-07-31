@@ -14,12 +14,22 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		.swal2-popup {
-			font-size: 0.6rem !important; 
+			font-size: 0.8rem !important; 
 			width: 95%;
 			max-width: 400px !important; /* Ukuran lebar kustom */
 			max-height: 300px;
             z-index: 0 !important; 
 		}
+
+        @media screen and (max-width: 500px) {
+            .swal2-popup {
+                font-size: 0.6rem !important; 
+                width: 95%;
+                max-width: 400px !important; /* Ukuran lebar kustom */
+                max-height: 300px;
+                z-index: 0 !important; 
+            }
+        }
 	</style>
 
 	<title>Halaman User</title>
@@ -71,7 +81,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
                         <li>
-							<a class="active" href="#">Login</a>
+							<a class="active" href="#">Login Admin</a>
 						</li>
 					</ul>
 				</div>
@@ -110,6 +120,7 @@
         // Check URL parameters for status
 		const urlParams = new URLSearchParams(window.location.search);
 		const status = urlParams.get('status');
+		const logout = urlParams.get('logout');
 
 		if (status === 'error-password-salah') {
 			Swal.fire({
@@ -125,6 +136,15 @@
 				icon: 'error',
 				title: 'NIP tidak ditemukan!',
 				text: 'Silahkan coba kembali!.',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+		} else if (logout === 'success') {
+			Swal.fire({
+				icon: 'success',
+				title: 'Logout berhasil!',
+				text: '',
 				customClass: {
 					popup: 'swal2-popup'
 				}

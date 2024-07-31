@@ -14,12 +14,22 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<style>
 		.swal2-popup {
-			font-size: 0.6rem !important; 
+			font-size: 0.8rem !important; 
 			width: 95%;
 			max-width: 400px !important; /* Ukuran lebar kustom */
 			max-height: 300px;
             z-index: 0 !important; 
 		}
+
+        @media screen and (max-width: 500px) {
+            .swal2-popup {
+                font-size: 0.6rem !important; 
+                width: 95%;
+                max-width: 400px !important; /* Ukuran lebar kustom */
+                max-height: 300px;
+                z-index: 0 !important; 
+            }
+        }
 	</style>
 
 	<title>Halaman User</title>
@@ -110,6 +120,7 @@
         // Check URL parameters for status
 		const urlParams = new URLSearchParams(window.location.search);
 		const status = urlParams.get('status');
+		const logout = urlParams.get('logout');
 
 		if (status === 'success') {
 			Swal.fire({
@@ -143,6 +154,15 @@
 				icon: 'error',
 				title: 'NIK harus menggunakan angka!',
 				text: 'Silahkan ulangi kembali penulisan NIK!.',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+        } else if (logout === 'success') {
+            Swal.fire({
+				icon: 'success',
+				title: 'Berhasil logout!',
+				text: '',
 				customClass: {
 					popup: 'swal2-popup'
 				}

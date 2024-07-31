@@ -24,6 +24,16 @@
 			max-height: 300px;
             z-index: 0 !important; 
 		}
+
+        @media screen and (max-width: 500px) {
+            .swal2-popup {
+                font-size: 0.6rem !important; 
+                width: 95%;
+                max-width: 400px !important; /* Ukuran lebar kustom */
+                max-height: 300px;
+                z-index: 0 !important; 
+            }
+        }
 	</style>
 
 </head>
