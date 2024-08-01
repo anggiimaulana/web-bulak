@@ -30,10 +30,10 @@
     $sql2 = "SELECT * FROM pengajuan WHERE id_pengajuan = '$id_pengajuan' AND nik = '$nik'";
     $result2 = mysqli_query($conn, $sql2);
     if ($result2 && mysqli_num_rows($result2) > 0) {
-        $usahaData = mysqli_fetch_assoc($result2);
-        $usaha = $usahaData['nama_usaha'];
+        $data_pengajuan = mysqli_fetch_assoc($result2);
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
-        $tanggal_acc = $usahaData['tanggal_acc'];
+        $tanggal_acc = $data_pengajuan['tanggal_acc'];
+        $ttd = $data_pengajuan['nama_kuwu'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
     }
@@ -161,28 +161,31 @@
 
     // waktu pengajuan
     $pdf->SetFont('Times', '', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 20);
+    $pdf->SetXY(150, $pdf->GetY() + 15);
     $tempat = 'Bulak, ';
-
+    
     $bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
     $tanggal_acc_array = explode('-', $tanggal_acc);
     $tanggal_acc_indo = $tanggal_acc_array[2] . ' ' . $bulan[(int)$tanggal_acc_array[1]] . ' ' . $tanggal_acc_array[0];
-
-    $pdf->MultiCell(145, 7, $tempat . $tanggal_acc_indo, 0, 'R');
-
+    
+    $pdf->Cell(0, 7, $tempat . $tanggal_acc_indo, 0, 1, 'R');
+    
     // kuwu
     $pdf->SetFont('Times', '', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 0);
+    $pdf->SetXY(150, $pdf->GetY() + 0);
     $waktu = 'Kuwu Bulak';
-    $pdf->MultiCell(139, 7, $waktu, 0, 'R');
-
+    $pdf->Cell(0, 7, $waktu, 0, 1, 'c');
+    
     // ttd
     $pdf->SetFont('Times', 'B', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 15);
-    $nama_kuwu = 'SURADI BUDIYANTO';
-    $pdf->MultiCell(150, 7, $nama_kuwu, 0, 'R');
+    $pdf->SetXY(150, $pdf->GetY() + 20);
+    $nama_length = $pdf->GetStringWidth($ttd);
+    $centered_position = (320 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
+    $pdf->SetX($centered_position);
+    $pdf->Cell(0, 7, $ttd, 0, 1, 'L');
 
     ob_clean();
     flush();
+    // $pdf->Output();
     $pdf->Output('D', $nama_file);
 

@@ -33,6 +33,7 @@
         $data_pengajuan = mysqli_fetch_assoc($result2);
         $ktp_sementara_berlaku = $data_pengajuan['masa_ktp_sementara'];
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
+        $ttd = $data_pengajuan['nama_kuwu'];
         $tanggal_acc = $data_pengajuan['tanggal_acc'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
@@ -185,31 +186,30 @@
     $startX = 45; // Posisi X
     $startY = 210; // Posisi Y, sesuaikan sesuai kebutuhan
 
-    // bersangkutan
-    $startY += 7; // Tambahkan Y untuk baris berikutnya
-    $pdf->SetXY($startX, $startY);
-    $pdf->Cell(85, 7, ' ', 0, 0, 'L'); // Teks Label
-    $pdf->Cell(0, 7, 'Bulak, '.$tanggal_acc, 0, 1, 'L'); // Data
+    // waktu pengajuan
+    $pdf->SetFont('Times', '', 12);
+    $pdf->SetXY(150, $pdf->GetY() + 15);
+    $tempat = 'Bulak, ';
     
-    $startY += 7; // Tambahkan Y untuk baris berikutnya
-    $pdf->SetXY($startX, $startY);
-    $pdf->Cell(90, 7, 'Yang Bersangkutan,', 0, 0, 'L'); // Teks Label
-    $pdf->Cell(0, 7, 'Kuwu Bulak,', 0, 1, 'L'); // Data
+    $bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    $tanggal_acc_array = explode('-', $tanggal_acc);
+    $tanggal_acc_indo = $tanggal_acc_array[2] . ' ' . $bulan[(int)$tanggal_acc_array[1]] . ' ' . $tanggal_acc_array[0];
     
-    // data 
-    $startY += 25; // Tambahkan Y untuk baris berikutnya
+    $pdf->Cell(0, 7, $tempat . $tanggal_acc_indo, 0, 1, 'R');
+    
+    // kuwu
+    $pdf->SetFont('Times', '', 12);
+    $pdf->SetXY(150, $pdf->GetY() + 0);
+    $waktu = 'Kuwu Bulak';
+    $pdf->Cell(0, 7, $waktu, 0, 1, 'c');
+    
+    // ttd
     $pdf->SetFont('Times', 'B', 12);
-    $pdf->SetXY($startX, $startY);
-    $pdf->Cell(80, 7, $userData['nama'], 0, 0, 'L'); // Teks Label
-    
-    $pdf->SetFont('Times', 'B', 12);
-    $pdf->Cell(0, 7, 'SURADI BUDIYANTO', 0, 1, 'L'); // Data
-
-    // // ttd
-    // $pdf->SetFont('Times', 'B', 12);
-    // $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 20);
-    // $nama_kuwu = 'SURADI BUDIYANTO';
-    // $pdf->MultiCell(152, 7, $nama_kuwu, 0, 'R');
+    $pdf->SetXY(150, $pdf->GetY() + 20);
+    $nama_length = $pdf->GetStringWidth($ttd);
+    $centered_position = (320 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
+    $pdf->SetX($centered_position);
+    $pdf->Cell(0, 7, $ttd, 0, 1, 'L');
 
     ob_clean();
     flush();

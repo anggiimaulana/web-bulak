@@ -35,6 +35,7 @@
         $nama_kk = $data_pengajuan['nama_kk'];
         $nama_akte_dokumen = $data_pengajuan['nama_akte_dokumen'];
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
+        $ttd = $data_pengajuan['nama_kuwu'];
         $tanggal_acc = $data_pengajuan['tanggal_acc'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
@@ -242,26 +243,28 @@
 
     // waktu pengajuan
     $pdf->SetFont('Times', '', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 2);
+    $pdf->SetXY(150, $pdf->GetY() + 3);
     $tempat = 'Bulak, ';
 
     $bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
     $tanggal_acc_array = explode('-', $tanggal_acc);
     $tanggal_acc_indo = $tanggal_acc_array[2] . ' ' . $bulan[(int)$tanggal_acc_array[1]] . ' ' . $tanggal_acc_array[0];
 
-    $pdf->MultiCell(145, 7, $tempat . $tanggal_acc_indo, 0, 'R');
+    $pdf->Cell(0, 7, $tempat . $tanggal_acc_indo, 0, 1, 'R');
 
     // kuwu
     $pdf->SetFont('Times', '', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 0);
+    $pdf->SetXY(150, $pdf->GetY() + 0);
     $waktu = 'Kuwu Bulak';
-    $pdf->MultiCell(139, 7, $waktu, 0, 'R');
+    $pdf->Cell(0, 7, $waktu, 0, 1, 'c');
 
     // ttd
     $pdf->SetFont('Times', 'B', 12);
-    $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 15);
-    $nama_kuwu = 'SURADI BUDIYANTO';
-    $pdf->MultiCell(150, 7, $nama_kuwu, 0, 'R');
+    $pdf->SetXY(150, $pdf->GetY() + 14);
+    $nama_length = $pdf->GetStringWidth($ttd);
+    $centered_position = (320 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
+    $pdf->SetX($centered_position);
+    $pdf->Cell(0, 7, $ttd, 0, 1, 'L');
 
     ob_clean();
     flush();
