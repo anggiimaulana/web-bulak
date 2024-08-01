@@ -90,7 +90,7 @@ if (strlen($displayName) > 30) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Daftar Akun User</h1>
+                    <h1>Tambah Akun User</h1>
                     <ul class="breadcrumb">
                         <li>
                             <a href="daftar.html">Admin</a>
@@ -226,8 +226,8 @@ if (strlen($displayName) > 30) {
 		if (status === 'success') {
 			Swal.fire({
 				icon: 'success',
-				title: 'Pendaftaran Berhasil!',
-				text: 'Silahkan login!',
+				title: 'Pendaftaran Akun User Berhasil!',
+				text: '',
 				customClass: {
 					popup: 'swal2-popup'
 				}

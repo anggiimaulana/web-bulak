@@ -47,10 +47,11 @@ if (isset($_GET['id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id_pengajuan"];
     $status = $_POST["status"];
+    $ttd = $_POST["ttd"];
     $tanggal_acc = $_POST["tanggal_acc"];
 
-    $stmt = $conn->prepare("UPDATE pengajuan SET status=?, tanggal_acc=? WHERE id_pengajuan=?");
-    $stmt->bind_param("ssi", $status, $tanggal_acc, $id);
+    $stmt = $conn->prepare("UPDATE pengajuan SET status=?, tanggal_acc=?, nama_kuwu=? WHERE id_pengajuan=?");
+    $stmt->bind_param("sssi", $status, $tanggal_acc, $ttd, $id);
 
     if ($stmt->execute()) {
         header("Location: ../pengajuan_user.php?keterangan=pengajuan-sk-success");
@@ -223,6 +224,10 @@ $conn->close();
                                     </div>
                                 </div>
                                 <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="ttd">Yang Bertanda Tangan</label>
+                                        <input type="text" id="ttd" name="ttd" required>
+                                    </div>
                                     <div class="data-user">
                                         <label for="status">Status</label>
                                         <select id="status" name="status" required>

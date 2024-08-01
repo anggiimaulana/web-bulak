@@ -1,20 +1,22 @@
 <?php
-session_start(); // Memulai sesi
+session_start();
 require '../../config/db.php';
 
 // Mengecek apakah pengguna sudah login
-if (!isset($_SESSION['nip'])) {
+if (!isset($_SESSION['nip'])){
     header('Location: ../../login-admin.php');
     exit();
 }
 
-// Mendapatkan data pengguna dari tabel admin
+// Mendapatkan data pengguna dari session
 $nip = $_SESSION['nip'];
+
+// Mendapatkan data pengguna dari tabel admin
 $sql = "SELECT * FROM admin WHERE nip = '$nip'";
 $result = mysqli_query($conn, $sql);
 $userData = mysqli_fetch_assoc($result);
 
-// Membatasi panjang nama menjadi maksimal 15 karakter
+// Membatasi panjang nama menjadi maksimal 30 karakter
 $displayName = $userData['nama'];
 if (strlen($displayName) > 30) {
     $displayName = substr($displayName, 0, 30) . '...';
@@ -39,7 +41,7 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
     } else {
         echo "Data tidak tersedia!";
-        exit;
+        exit();
     }
 }
 
@@ -48,13 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id_pengajuan"];
     $status = $_POST["status"];
     $tanggal_acc = $_POST["tanggal_acc"];
+    $ttd = $_POST["ttd"];
 
-    $stmt = $conn->prepare("UPDATE pengajuan SET status=?, tanggal_acc=? WHERE id_pengajuan=?");
-    $stmt->bind_param("ssi", $status, $tanggal_acc, $id);
+    $stmt = $conn->prepare("UPDATE pengajuan SET status=?, tanggal_acc=?, nama_kuwu=? WHERE id_pengajuan=?");
+    $stmt->bind_param("sssi", $status, $tanggal_acc, $ttd, $id);
 
     if ($stmt->execute()) {
         header("Location: ../pengajuan_user.php?keterangan=pengajuan-skd-success");
-        exit;
+        exit();
     } else {
         echo "Error updating record: " . htmlspecialchars($conn->error);
     }
@@ -62,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -223,6 +228,10 @@ $conn->close();
                                     </div>
                                 </div>
                                 <div class="form-column">
+                                    <div class="data-user">
+                                        <label for="ttd">Yang Bertanda Tangan</label>
+                                        <input type="text" id="ttd" name="ttd" required>
+                                    </div>
                                     <div class="data-user">
                                         <label for="status">Status</label>
                                         <select id="status" name="status" required>

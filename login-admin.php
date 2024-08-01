@@ -39,17 +39,8 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-face-mask'></i>
-			<span class="text">Selamat Datang</span>
-		</a>
+		<?php include 'brand.php' ?>
 		<ul class="side-menu top">
-			<li>
-				<a href="daftar.php">
-					<i class='bx bxs-user-plus'></i>
-					<span class="text">Daftar Akun</span>
-				</a>
-			</li>
 			<li class="active">
 				<a href="#">
 					<i class='bx bx-log-in-circle'></i>
@@ -60,14 +51,10 @@
 	</section>
 	<!-- SIDEBAR -->
 
-
-
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-		</nav>
+		<?php include 'navbar.php' ?>
 		<!-- NAVBAR -->
 
 		<!-- MAIN -->
