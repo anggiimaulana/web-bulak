@@ -9,6 +9,18 @@
 		exit();
 	}
 
+		// Mendapatkan data pengguna dari tabel user
+	$nik = $_SESSION['nik'];
+	$sql = "SELECT * FROM user WHERE nik = '$nik'";
+	$result = mysqli_query($conn, $sql);
+	$userData = mysqli_fetch_assoc($result);
+
+	// Membatasi panjang nama menjadi maksimal 15 karakter
+	$displayName = $userData['nama'];
+	if (strlen($displayName) > 30) {
+		$displayName = substr($displayName, 0, 30) . '...';
+	}
+
 	// Fungsi untuk menentukan URL berdasarkan id_kategori
 	function getUrlByKategori($id_kategori, $id_pengajuan) {
 		switch ($id_kategori) {
@@ -33,10 +45,7 @@
 <body>	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-face-mask'></i>
-			<span class="text">Selamat Datang</span>
-		</a>
+		<?php include 'brand.php' ?>
 		<ul class="side-menu top">
 			<li class="active">
 				<a href="#">
