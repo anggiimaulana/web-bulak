@@ -101,6 +101,12 @@ $row = $result->fetch_assoc();
                 </a>
             </li>
             <li>
+                <a href="galeri.php">
+                    <i class='bx bxs-camera' ></i>
+                    <span class="text">Galeri Desa</span>
+                </a>
+            </li>
+            <li>
                 <a href="kritik-saran.php">
                     <i class='bx bxl-discord'></i>
                     <span class="text">Kritik Dan Saran</span>

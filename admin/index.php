@@ -95,7 +95,7 @@ $result_admins = $conn->query($sql_admins);
             </li>
             <li>
                 <a href="galeri.php">
-                    <i class='bx bxs-file' ></i>
+                    <i class='bx bxs-camera' ></i>
                     <span class="text">Galeri Desa</span>
                 </a>
             </li>

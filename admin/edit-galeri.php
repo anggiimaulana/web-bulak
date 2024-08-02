@@ -98,9 +98,9 @@
                     <span class="text">Pengajuan User</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="galeri.php">
-                    <i class='bx bxs-file' ></i>
+                    <i class='bx bxs-camera' ></i>
                     <span class="text">Galeri Desa</span>
                 </a>
             </li>
