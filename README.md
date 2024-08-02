@@ -7,4 +7,4 @@ Disini, masyarakat setempat bisa langsung mengajukan sebuah surat keterangan tan
 Note : 
 1. Folder database saya sembunyikan mweheheheee.
 2. Untuk mencetak pdf, install FPDF dan simpan di folder USER!. 
-install disini -- http://www.fpdf.org/ --
+Install FPDF disini -- http://www.fpdf.org/ --
