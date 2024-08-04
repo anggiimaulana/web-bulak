@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isi_artikel = $_POST['isi_artikel'];
     $tanggal = $_POST['tanggal'];
     $status = $_POST['status'];
+    $kategori = $_POST['kategori'];
 
     // Proses unggah gambar
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gambar = $newFileName;
 
             // Query untuk menambah artikel
-            $sql = "INSERT INTO artikel (gambar, judul_artikel, isi_artikel, tanggal, status) VALUES ('$gambar', '$judul_artikel', '$isi_artikel', '$tanggal', '$status')";
+            $sql = "INSERT INTO artikel (gambar, judul_artikel, isi_artikel, tanggal, kategori, status) VALUES ('$gambar', '$judul_artikel', '$isi_artikel', '$tanggal', '$kategori', '$status')";
 
             if ($conn->query($sql) === true) {
                 header("Location: artikel.php?status=tambah-artikel-success");
@@ -173,6 +174,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label for="tanggal">Tanggal:</label>
                                         <input type="date" id="tanggal" name="tanggal" required>
                                     </div>
+                                    <div class="data-user">
+                                        <label for="kategori">Kategori:</label>
+                                        <select name="kategori" id="kategori" required>
+                                            <!-- <option selected disabled>Pilih salah satu</option> -->
+                                            <option value="Berita">Berita</option>
+                                            <option value="Pengumuman">Pengumuman</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-column">
                                     <div class="data-user">
@@ -185,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                     <div class="data-user">
                                         <label for="status">Status:</label>
-                                        <select id="status" name="status">
+                                        <select id="status" name="status" required>
                                             <option value="Publish">Publish</option>
                                             <option value="Pending">Pending</option>
                                         </select>

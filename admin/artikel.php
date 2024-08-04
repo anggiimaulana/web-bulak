@@ -21,7 +21,7 @@ if (strlen($displayName) > 30) {
 }
 
 // Query untuk mengambil data artikel
-$sql = "SELECT id_artikel, gambar, judul_artikel, isi_artikel, tanggal, status FROM artikel ORDER BY id_artikel DESC";
+$sql = "SELECT id_artikel, gambar, judul_artikel, isi_artikel, tanggal, kategori, status FROM artikel ORDER BY id_artikel DESC";
 $result = $conn->query($sql);
 ?>
 <?php include 'header.php' ?>
@@ -127,6 +127,7 @@ $result = $conn->query($sql);
                                 <th>Judul Artikel</th>
                                 <th>Isi Artikel</th>
                                 <th>Tanggal</th>
+                                <th>Kategori</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -154,6 +155,7 @@ $result = $conn->query($sql);
                                     echo "<td>" . $judul . "</td>";
                                     echo "<td>" . $isi_artikel . "</td>";
                                     echo "<td>" . $row['tanggal'] . "</td>";
+                                    echo "<td>" . $row['kategori'] . "</td>";
                                     $statusClass = $row['status'] == 'Publish' ? 'completed' : 'pending';
                                     echo "<td><span class='status " . $statusClass . "'>" . ($row['status'] == 'Publish' ? 'Publish' : 'Pending') . "</span></td>";
                                     echo "<td>
