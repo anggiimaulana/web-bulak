@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isi_artikel = $_POST['isi_artikel'];
     $tanggal = $_POST['tanggal'];
     $status = $_POST['status'];
-
+    $kategori = $_POST['kategori'];
+    
     // Proses unggah gambar baru jika ada
     if (isset($_FILES['gambar_baru']) && $_FILES['gambar_baru']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['gambar_baru']['tmp_name'];
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Query untuk mengupdate artikel
-    $sql = "UPDATE artikel SET gambar='$gambar', judul_artikel='$judul_artikel', isi_artikel='$isi_artikel', tanggal='$tanggal', status='$status' WHERE id_artikel='$id_artikel'";
+    $sql = "UPDATE artikel SET gambar='$gambar', judul_artikel='$judul_artikel', isi_artikel='$isi_artikel', tanggal='$tanggal', kategori='$kategori', status='$status' WHERE id_artikel='$id_artikel'";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: artikel.php?status=edit-artikel-success");
@@ -205,6 +206,13 @@ $row = $result->fetch_assoc();
                                     <div class="data-user">
                                         <label for="gambar_baru">Gambar Baru:</label>
                                         <input type="file" id="gambar_baru" name="gambar_baru">
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="kategori">Kategori:</label>
+                                        <select name="kategori" id="kategori">
+                                            <option value="Berita" <?php if ($row['kategori'] == 'Berita') echo 'selected'; ?>>Berita</option>
+                                            <option value="Pengumuman" <?php if ($row['kategori'] == 'Pengumuman') echo 'selected'; ?>>Pengumuman</option>
+                                        </select>
                                     </div>
                                     <div class="data-user">
                                         <label for="status">Status:</label>

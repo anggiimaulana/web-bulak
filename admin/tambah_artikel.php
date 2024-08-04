@@ -177,7 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="data-user">
                                         <label for="kategori">Kategori:</label>
                                         <select name="kategori" id="kategori" required>
-                                            <!-- <option selected disabled>Pilih salah satu</option> -->
                                             <option value="Berita">Berita</option>
                                             <option value="Pengumuman">Pengumuman</option>
                                         </select>
