@@ -1,0 +1,478 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.top-bar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+header {
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+header.sticky {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+header .logo img {
+  height: 40px; /* Perkecil ukuran logo */
+  margin-right: 10px; /* Tambahkan jarak antara logo dan teks */
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  margin-left: auto; /* Geser navbar ke kanan */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav ul li a:hover {
+  background-color: #007bff;
+  border-radius: 5px;
+}
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+nav ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+nav ul li ul li {
+  width: 200px;
+}
+
+/* Navbar customization */
+.navbar-nav .nav-link {
+  color: #007bff; /* Change to your desired color */
+  font-weight: bold;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #eeeeee;
+  background-color: #007bff; /* Change to your desired hover color */
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:hover {
+  color: white; /* Change to white when active or hovered */
+  background-color: #007bff; /* Blue background when active or hovered */
+  border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+}
+
+.navbar-nav .dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.navbar-nav .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navbar-nav .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navbar-nav .dropdown-item {
+  color: #007bff; /* Change to your desired color */
+}
+
+.navbar-nav .dropdown-item:hover {
+  color: #0056b3; /* Change to your desired hover color */
+  background-color: #e9ecef; /* Change to your desired hover background color */
+}
+
+/* Logo customization */
+.logo img {
+  max-height: 50px; /* Adjust the height as needed */
+}
+
+.logo span {
+  font-size: 1.2rem; /* Adjust the font size as needed */
+  font-weight: bold;
+}
+
+/* Carousel customization */
+.carousel-inner img {
+  height: 500px; /* Set the desired height */
+  object-fit: cover; /* Ensure the image covers the area */
+  width: 100%; /* Ensure the image takes full width */
+  transition: transform 0.5s ease-in-out; /* Add smooth transition */
+}
+
+.carousel-item {
+  transition: transform 0.5s ease-in-out; /* Add smooth transition for carousel items */
+}
+
+/* Marquee styles */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  background-color: #65b0ff;
+  color: white;
+  padding: 10px 0;
+  position: relative;
+}
+
+.marquee p {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* News and Announcements */
+.news-announcements {
+  margin-top: 20px;
+}
+
+.news-announcements h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  color: #007bff; /* Ubah warna h2 menjadi biru */
+  font-weight: normal; /* buatkan agar text tidak tebal */
+}
+.news-announcements h2 span {
+  font-weight: bold; /* buatkan agar text tidak tebal */
+}
+
+.news-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.news-item img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.news-content h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: rgb(62, 143, 255); /* Ubah warna h3 menjadi biru */
+}
+
+.news-content p {
+  margin: 5px 0;
+  color: gray; /* Ubah warna p menjadi abu-abu */
+}
+
+.announcements-list,
+.agenda-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.announcements-list li,
+.agenda-list li {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.announcements-list li a,
+.agenda-list li a {
+  color: white;
+  text-decoration: none;
+}
+
+.agenda-list li p {
+  margin: 0;
+}
+
+.map-all {
+  background-color: #ebebeb;
+  margin: 0px;
+  padding: 20px 0px; /* Add padding for better spacing */
+}
+
+.map-section {
+  text-align: center; /* Center the content */
+}
+
+.map-section h2 {
+  color: #007bff; /* Match the theme color */
+  margin-bottom: 20px; /* Add space below the heading */
+}
+
+.map-section iframe {
+  border: 2px solid #007bff; /* Match the border color */
+  border-radius: 5px;
+  width: 100%;
+  height: 400px;
+}
+
+.secsvg {
+  width: 100%;
+  border-radius: 0; /* Remove rounded corners */
+  padding: 0; /* Remove padding */
+  margin-bottom: -50px;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #007bff;
+  color: white;
+}
+
+.footer h5 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.footer p,
+.footer a {
+  color: white;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .social-icons a {
+  color: white;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.footer .social-icons a:hover {
+  color: #ccc;
+}
+
+.footer .list-unstyled {
+  padding-left: 0;
+}
+
+.footer .list-unstyled li {
+  margin-bottom: 10px;
+}
+
+/* Kritik dan Saran */
+.feedback-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-section h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.feedback-section .form-label {
+  font-weight: bold;
+}
+
+.feedback-section .form-control {
+  border-radius: 5px;
+}
+
+.feedback-section .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.feedback-section .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.text-abu {
+  color: #777;
+}
+
+/* Article content styles */
+.article-content {
+  margin-top: 20px;
+}
+
+.article-content h1 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.article-content .meta {
+  color: gray;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  width: 50%; /* Tambahkan ini untuk mengurangi ukuran gambar */
+}
+
+.article-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+@keyframes slide {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100%; /* Adjust this value based on the total height of the comments */
+  }
+}
+
+.navbar-toggler {
+  margin-left: auto; /* Pindahkan hamburger ke sebelah kanan */
+}
+
+/* Media queries for mobile and tablet */
+@media (max-width: 768px) {
+  header .logo img {
+    height: 30px; /* Perkecil ukuran logo */
+  }
+
+  header .logo span {
+    font-size: 1rem; /* Perkecil ukuran teks */
+  }
+
+  .navbar-collapse {
+    width: 100%;
+  }
+
+  .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+
+  .navbar-nav .dropdown-menu {
+    display: none; /* Hide dropdown menu by default */
+    position: static;
+    float: none;
+    width: 100%;
+    margin-top: 0;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .navbar-nav .dropdown-menu .dropdown-item {
+    padding: 10px 20px;
+    color: #007bff;
+  }
+
+  .navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef;
+  }
+
+  .navbar-nav .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+
+  .navbar-nav .dropdown-menu.show {
+    display: block;
+  }
+}
+
+.break-word {
+  word-wrap: break-word;
+  word-break: break-word;
+}
