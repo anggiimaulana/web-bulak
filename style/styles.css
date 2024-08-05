@@ -96,9 +96,7 @@ nav ul li:hover ul {
   transform: translateY(0);
 }
 
-nav ul li ul li {
-  width: 200px;
-}
+
 
 /* Navbar customization */
 .navbar-nav .nav-link {
@@ -438,7 +436,7 @@ nav ul li ul li {
 
   .navbar-nav .dropdown-menu {
     display: none; /* Hide dropdown menu by default */
-    position: static;
+    position: relative;
     float: none;
     width: 100%;
     margin-top: 0;
