@@ -55,7 +55,7 @@ mysqli_close($conn);
                 <span><i class="fas fa-calendar-alt"></i> <?php echo date('d F Y', strtotime($created_at)); ?></span> |
                 <span><i class="fas fa-user"></i>Administrator</span>
             </div><br>
-            <img src="<?php echo "../admin/uploads/" . $image; ?>" alt="<?php echo $title; ?>" style="width:400px">
+            <img src="<?php echo "../admin/image/" . $image; ?>" alt="<?php echo $title; ?>" style="width:400px">
             <p><?php echo nl2br($content); ?></p>
         </div>
         <!-- end isi artikel -->

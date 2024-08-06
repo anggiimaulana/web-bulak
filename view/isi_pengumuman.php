@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) > 0) {
                 <span><i class="fas fa-calendar-alt"></i> <?php echo date('d F Y', strtotime($tanggal)); ?></span> |
                 <span><i class="fas fa-user"></i>Administrator</span>
             </div><br>
-            <img src="<?php echo "../admin/uploads/" . $gambar; ?>" alt="<?php echo $title; ?>" style="width:400px">
+            <img src="<?php echo "../admin/image/" . $gambar; ?>" alt="<?php echo $title; ?>" style="width:400px">
             <p><?php echo nl2br($isi_artikel); ?></p>
         </div>
         <!-- end isi pengumuman -->

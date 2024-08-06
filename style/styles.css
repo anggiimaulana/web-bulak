@@ -17,6 +17,13 @@ body {
   margin: 0 10px;
 }
 
+@media screen and (max-width:576px) {
+  .top-bar span,
+  .top-bar a {
+    font-size: 12px;
+  }
+}
+
 /* nav {
   background-color: white;
   border-bottom: 1px solid #ccc;
@@ -115,12 +122,18 @@ nav ul li:hover ul {
   background-color: #007bff; /* Change to your desired hover color */
 }
 
-.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:active,
 .navbar-nav .nav-link:focus,
 .navbar-nav .nav-link:hover {
   color: white; /* Change to white when active or hovered */
   background-color: #007bff; /* Blue background when active or hovered */
   border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+}
+
+.nav-link.dropdown-toggle:focus, 
+.nav-link.dropdown-toggle:active {
+    color: white !important;
+    padding: 10px;
 }
 
 .navbar-nav .dropdown-menu {
@@ -189,6 +202,16 @@ span {
   animation: marquee 15s linear infinite;
   font-size: 1.2rem;
   margin: 0;
+}
+
+@media screen and (max-width:576px) {
+  .marquee p {
+    font-size: 12px;
+  }
+
+  .marquee {
+    padding: 10px;
+  }
 }
 
 @keyframes marquee {
@@ -302,12 +325,13 @@ span {
 
 .footer h5 {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .footer p,
 .footer a {
   color: white;
+  font-size: 13px;
 }
 
 .footer a {
@@ -334,6 +358,12 @@ span {
 
 .footer .list-unstyled li {
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .footer .list-unstyled li {
+    font-size: 13px;
+  }
 }
 
 /* Kritik dan Saran */
@@ -429,15 +459,11 @@ span {
     width: 100%;
   }
 
-  .navbar-nav {
-    width: 100%;
-    text-align: center;
-  }
-
-  .navbar-nav .nav-item {
-    width: 100%;
+  
   } */
-
+  .navbar-nav {
+    margin-top: 10px;
+  }
   .navbar-nav .dropdown-menu {
     display: none; /* Hide dropdown menu by default */
     position: relative;
@@ -447,6 +473,7 @@ span {
     background-color: transparent;
     border: none;
     box-shadow: none;
+    color: white;
   }
 
   .navbar-nav .dropdown-menu .dropdown-item {
@@ -471,6 +498,15 @@ span {
 
   .navbar-nav .dropdown-menu.show {
     display: block;
+  }
+
+  .nav-user {
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  .nav-user, .nav-admin {
+    text-align: center;
   }
 }
 

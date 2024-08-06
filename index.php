@@ -52,18 +52,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav class="container navbar navbar-expand-lg bg-body-light">
       <div class="container-fluid">
         <a href="index.php">
-                        <img src="desa-img/logo_indra.jpeg" alt="Logo Desa Bulak"> <!-- Replace with your logo -->
-                    </a>
-                    <div class="ms-3">
-                        <span>Desa Bulak</span><br>
-                        <span>Kabupaten Indramayu</span>
-                    </div>
+            <img src="desa-img/logo_indra.jpeg" alt="Logo Desa Bulak"> <!-- Replace with your logo -->
+        </a>
+        <div class="ms-3">
+            <span>Desa Bulak</span><br>
+            <span>Kabupaten Indramayu</span>
+        </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-          <li class="nav-item dropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#profil" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Profil Desa
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="news-announcements container mt-5">
         <div class="row">
             <div class="head-news col-md-8">
-                <h2 style="font-weight: bold;"><a href="../view/berita_desa.php">Berita Terkini</a></h2>
+                <h4 style="font-weight: bold; margin-bottom:15px; margin-top:10px"><a href="../view/berita_desa.php">Berita Terkini</a></h4>
                 <?php
                 $kategori = 
                 $sql = "SELECT id_artikel, judul_artikel, tanggal, isi_artikel, gambar FROM artikel where kategori = 'Berita' ORDER BY id_artikel DESC LIMIT 4";
@@ -170,11 +170,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     echo "0 results";
                 }
-                ?>
+                ?>gi
             </div>
             <!-- pengumuman -->
             <div class="col-md-4">
-                <h2 style="font-weight: bold;"><a href="../view/pengumuman.php">Pengumuman</a></h2>
+                <h4 style="font-weight: bold; margin-bottom:15px; margin-top:10px"><a href="../view/pengumuman.php">Pengumuman</a></h4>
                 <ul class="announcements-list">
                     <?php
                     $sql = "SELECT id_artikel, judul_artikel, tanggal, isi_artikel, gambar FROM artikel where kategori = 'Pengumuman' ORDER BY id_artikel DESC LIMIT 4";
@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo '<div class="news-content">';
                             echo '<h3> <a href="view/artikel.php?id=' . $row["id_artikel"] . '" style="text-decoration: none;">' . $row["judul_artikel"] . '</a></h3>';
                             echo '<p>' . date('d F Y', strtotime($row["tanggal"]))  . '</p>';
-                            echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="view/pengumuman.php?id=' . $row["id_artikel"] . '"></a>Selengkapnya</a></p>';
+                            echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="view/pengumuman.php?id=' . $row["id_artikel"] . '">Selengkapnya</a></p>';
                             echo '<p>oleh: administrator</p>';
                             echo '</div>';
                             echo '</div>';

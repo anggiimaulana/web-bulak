@@ -47,7 +47,7 @@
                 if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
                         echo '<article class="mb-4 d-flex">';
-                        echo '<img src="../admin/uploads/' . $row["gambar"] . '" class="img-fluid me-3" alt="News Image" style="width: 150px; height: 190px;">';
+                        echo '<img src="../admin/image/' . $row["gambar"] . '" class="img-fluid me-3" alt="News Image" style="width: 150px; height: 190px;">';
                         echo '<div>';
                         echo '<h3> <a href="../view/artikel.php?id=' . $row["id_artikel"] . '" style="text-decoration: none;">' . $row["judul_artikel"] . '</a></h3>';
                         echo '<p><i class="fas fa-calendar-alt"></i> ' . date('d F Y', strtotime($row["tanggal"])) . ' <i class="fas fa-user"></i> Administrator</p>';

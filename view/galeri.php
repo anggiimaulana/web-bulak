@@ -13,7 +13,7 @@ require '../function/koneksi.php';
             <li class="breadcrumb-item active" aria-current="page">Galeri</li>
         </ol>
     </nav>
-    <!-- end breadcrumb -->x`
+    <!-- end breadcrumb -->
 
 
     <!-- Galeri -->
@@ -31,7 +31,7 @@ require '../function/koneksi.php';
                         while($row = mysqli_fetch_assoc($result)) {
                             echo '<div class="col ">
                                 <div class="card h-100 shadow-sm p-3 mb-5 bg-body-tertiary">
-                                    <img src="../admin/uploads/' . $row["gambar"] . '" class="card-img-top" alt="' . $row["judul"] . '">
+                                    <img src="../admin/image/' . $row["gambar"] . '" class="card-img-top" alt="' . $row["judul"] . '">
                                     <div class="card-body">
                                         <h5 class="card-title">' . $row["judul"] . '</h5>
                                     </div>
