@@ -49,25 +49,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- end top info -->
 
     <!-- navbar -->
-    <header>
-        <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <div class="logo d-flex align-items-center mb-3 mb-lg-0">
-                <a href="">
-                    <img src="desa-img/logo_indra.jpeg" alt="Logo Desa Bulak"> <!-- Replace with your logo -->
-                </a>
-                <div class="ms-3">
-                    <span>Desa Bulak</span><br>
-                    <span>Kec. Jatibarang</span>
-                </div>
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
+    <nav class="container navbar navbar-expand-lg bg-body-light">
+      <div class="container-fluid">
+        <a href="index.php">
+                        <img src="desa-img/logo_indra.jpeg" alt="Logo Desa Bulak"> <!-- Replace with your logo -->
+                    </a>
+                    <div class="ms-3">
+                        <span>Desa Bulak</span><br>
+                        <span>Kabupaten Indramayu</span>
+                    </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+          <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#profil" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Profil Desa
@@ -102,19 +98,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             </ul>
                         </li>
-                        <li class="nav-user"><a class="nav-link"
-                                style="color: #ffffff; background-color: #00ba88; border-radius: 5px; margin-right: 10px; font-weight: normal;"
-                                href="login.php">Layanan
-                                Mandiri</a></li>
-                        <li class="nav-admin"><a class="nav-link"
-                                style="color: #ffffff; background-color: #007bff; border-radius: 5px; font-weight: normal;"
-                                href="login-admin.php">Login Admin</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <li class="nav-user"><a class="nav-link"
+                            style="color: #ffffff; background-color: #00ba88; border-radius: 5px; margin-right: 10px; font-weight: normal;"
+                            href="login.php">Layanan
+                            Mandiri</a></li>
+                    <li class="nav-admin"><a class="nav-link"
+                            style="color: #ffffff; background-color: #007bff; border-radius: 5px; font-weight: normal;"
+                            href="login-admin.php">Login Admin</a>
+                    </li>
+          </ul>
         </div>
-    </header>
+      </div>
+    </nav>
+    <hr class="mb-4">
     <!-- end navbar -->
 
     <!-- crousel -->
@@ -166,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '<div class="news-content">';
                         echo '<h3> <a href="view/artikel.php?id=' . $row["id_artikel"] . '" style="text-decoration: none;">' . $row["judul_artikel"] . '</a></h3>';
                         echo '<p>' . date('d F Y', strtotime($row["tanggal"]))  . '</p>';
-                        echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="../view/artikel.php?id=' . $row["id_artikel"] . '">Selengkapnya</a></p>';
+                        echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="view/artikel.php?id=' . $row["id_artikel"] . '">Selengkapnya</a></p>';
                         echo '<p>oleh: administrator</p>';
                         echo '</div>';
                         echo '</div>';
@@ -191,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo '<div class="news-content">';
                             echo '<h3> <a href="view/artikel.php?id=' . $row["id_artikel"] . '" style="text-decoration: none;">' . $row["judul_artikel"] . '</a></h3>';
                             echo '<p>' . date('d F Y', strtotime($row["tanggal"]))  . '</p>';
-                            echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="../view/pengumuman.php?id=' . $row["id_artikel"] . '"></a>Selengkapnya</a></p>';
+                            echo '<p>' . substr($row["isi_artikel"], 0, 50 ) . '... <a href="view/pengumuman.php?id=' . $row["id_artikel"] . '"></a>Selengkapnya</a></p>';
                             echo '<p>oleh: administrator</p>';
                             echo '</div>';
                             echo '</div>';
@@ -201,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                            echo '<li><a href="../view/pengumuman.php?id=' . $row["id_artikel"] . '">' . $row["judul_artikel"] . '</a></li>';
+                            echo '<li><a href="view/pengumuman.php?id=' . $row["id_artikel"] . '">' . $row["judul_artikel"] . '</a></li>';
                         }
                     } else {
                         echo "<li>Tidak ada pengumuman</li>";
@@ -209,28 +205,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </ul>
                 <!-- end pengumuman -->
-
-                <!-- agenda -->
-                <!-- <h2><a href="../view/agenda.php">Agenda Kegiatan</a></h2>
-                <ul class="agenda-list">
-                    <?php
-                    $sql = "SELECT created_at, judul, lokasi FROM agenda ORDER BY created_at DESC LIMIT 3";
-                    $result = mysqli_query($conn, $sql);
-
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            echo '<li>';
-                            echo '<p>' . date('M d, Y', strtotime($row["created_at"])) . '</p>';
-                            echo '<p>' . $row["judul"] . '</p>';
-                            echo '<p>Lokasi: ' . $row["lokasi"] . '</p>';
-                            echo '</li>';
-                        }
-                    } else {
-                        echo "<li>Tidak ada agenda kegiatan</li>";
-                    }
-                    ?>
-                </ul> -->
-                <!-- end agenda -->
             </div>
         </div>
     </section>
@@ -245,9 +219,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Lokasi Desa Bulak</h2>
             <div id="mapp">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40215.0512254856!2d108.29484755523632!3d-6.449452914454293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ec6e0217cc78f%3A0x401e8f1fc28cf70!2sJatibarang%2C%20Kec.%20Jatibarang%2C%20Kabupaten%20Indramayu%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1721282631653!5m2!1sid!2sid"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.522209748!2d108.31960031476916!3d-6.454843995348892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f0b7c9e8d8d5f%3A0x1e3f0e3b3e3c0a0!2sBulak%2C%20Jatibarang%2C%20Indramayu%2C%20Jawa%20Barat!5e0!3m2!1sen!2sid!4v1659759489121!5m2!1sen!2sid” width=“600” height=“450” style=“border:0;” allowfullscreen=“” loading=“lazy”"
                     width="100%" height="400" style="border: 2px solid #007bff; border-radius: 5px;" allowfullscreen=""
                     loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    
             </div>
         </section>
     </div>
@@ -258,46 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <!-- Footer -->
-    <footer class="footer mt-5 py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Profil</h5>
-                    <p>Desa Bulak - jatibarang<br>Kabupaten Indramayu - Jawa Barat</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit tempore itaque qui voluptates
-                        minima autem placeat nemo similique eligendi nisi aliquam doloribus dignissimos odit odio eius
-                        quo quia neque, hic a inventore tenetur mollitia! Obcaecati officia natus dolorem excepturi
-                        quae....</p>
-                    <a href="#">selengkapnya ➔</a>
-                </div>
-                <div class="col-md-4">
-                    <h5>Tautan</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Kabupaten Indramayu</a></li>
-                        <li><a href="#">KEMENDAGRI</a></li>
-                        <li><a href="#">KEMENDESA</a></li>
-                        <li><a href="#">KEMENKOMINFO</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Kontak Kami</h5>
-                    <p>Jl. Raya Bulak No. 122 jatibarang, Kode Pos 45273</p>
-                    <p><a href="tel:0226623181">022-6623181</a></p>
-                    <p><a href="mailto:pemdes@kertamulya-padalarang.desa.id">pemdes@jatibarang.desa.id</a>
-                    </p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <p>2024 © Rekayasa Perangkat Lunak POLINDRA.</p>
-            </div>
-        </div>
-    </footer>
+    <?php include 'template/footer.php' ?>
     <!-- end footer -->
 
     <script src="js/script.js"></script>

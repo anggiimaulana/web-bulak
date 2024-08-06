@@ -2,17 +2,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>Profil</h5>
-                    <p>Desa Bulak - jatibarang<br>Kabupaten Indramayu - Jawa Barat</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit tempore itaque qui voluptates
-                        minima autem placeat nemo similique eligendi nisi aliquam doloribus dignissimos odit odio eius
-                        quo quia neque, hic a inventore tenetur mollitia! Obcaecati officia natus dolorem excepturi
-                        quae....</p>
-                    <a href="#">selengkapnya ➔</a>
-                </div>
-                <div class="col-md-4">
                     <h5>Tautan</h5>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled" style="font-weight:400">
                         <li><a href="#">Kabupaten Indramayu</a></li>
                         <li><a href="#">KEMENDAGRI</a></li>
                         <li><a href="#">KEMENDESA</a></li>
@@ -34,8 +25,9 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="text-center mt-4">
-                <p>2024 © Rekayasa Perangkat Lunak POLINDRA.</p>
+                <p>© 2024 Rekayasa Perangkat Lunak POLINDRA.</p>
             </div>
         </div>
     </footer>

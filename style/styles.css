@@ -17,32 +17,32 @@ body {
   margin: 0 10px;
 }
 
-header {
+/* nav {
   background-color: white;
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
   position: sticky;
   top: 0;
   z-index: 1;
+} */
+
+/* nav.sticky {
+  background-color: rgba(255, 255, 255, 0.8); 
+  transition: background-color 0.3s ease; 
 }
 
-header.sticky {
-  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
-  transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-header .logo {
+nav {
   display: flex;
   align-items: center;
   margin-left: 15px;
+} */
+
+nav img {
+  height: 40px; /* Perkecil ukuran */
+  margin-right: 10px; /* Tambahkan jarak antara dan teks */
 }
 
-header .logo img {
-  height: 40px; /* Perkecil ukuran logo */
-  margin-right: 10px; /* Tambahkan jarak antara logo dan teks */
-}
-
-header .container {
+nav .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,6 +99,10 @@ nav ul li:hover ul {
 
 
 /* Navbar customization */
+.navbar-nav {
+  margin-left: auto;
+}
+
 .navbar-nav .nav-link {
   color: #007bff; /* Change to your desired color */
   font-weight: bold;
@@ -147,12 +151,12 @@ nav ul li:hover ul {
   background-color: #e9ecef; /* Change to your desired hover background color */
 }
 
-/* Logo customization */
-.logo img {
+/* customization */
+nav img {
   max-height: 50px; /* Adjust the height as needed */
 }
 
-.logo span {
+span {
   font-size: 1.2rem; /* Adjust the font size as needed */
   font-weight: bold;
 }
@@ -413,15 +417,15 @@ nav ul li:hover ul {
 
 /* Media queries for mobile and tablet */
 @media (max-width: 768px) {
-  header .logo img {
-    height: 30px; /* Perkecil ukuran logo */
+  nav img {
+    height: 30px; /* Perkecil ukuran */
   }
 
-  header .logo span {
-    font-size: 1rem; /* Perkecil ukuran teks */
+  nav span {
+    font-size: 15px; /* Perkecil ukuran teks */
   }
 
-  .navbar-collapse {
+  /* .navbar-collapse {
     width: 100%;
   }
 
@@ -432,7 +436,7 @@ nav ul li:hover ul {
 
   .navbar-nav .nav-item {
     width: 100%;
-  }
+  } */
 
   .navbar-nav .dropdown-menu {
     display: none; /* Hide dropdown menu by default */
