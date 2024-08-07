@@ -54,12 +54,6 @@ include 'header.php';
                     <span class="text">Galeri Desa</span>
                 </a>
             </li>
-            <li class="active">
-                <a href="#">
-                    <i class='bx bxl-discord'></i>
-                    <span class="text">Kritik Dan Saran</span>
-                </a>
-            </li>
             <li>
                 <a href="tambah_user.php">
                     <i class='bx bxs-user-plus'></i>

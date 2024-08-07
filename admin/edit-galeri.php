@@ -105,12 +105,6 @@
                 </a>
             </li>
             <li>
-                <a href="kritik-saran.php">
-                    <i class='bx bxl-discord' ></i>
-                    <span class="text">Kritik Dan Saran</span>
-                </a>
-            </li>
-            <li>
                 <a href="tambah_user.php">
                     <i class='bx bxs-user-plus' ></i>
                     <span class="text">Tambah User</span>
