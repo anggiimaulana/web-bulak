@@ -30,10 +30,10 @@ require '../function/koneksi.php';
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             echo '<div class="col ">
-                                <div class="card h-100 shadow-sm p-3 mb-5 bg-body-tertiary">
-                                    <img src="../admin/image/' . $row["gambar"] . '" class="card-img-top" alt="' . $row["judul"] . '">
+                                <div class="card shadow-sm p-3 mb-5 bg-body-tertiary" style="height: 300px">
+                                    <img style="width:100%; height: 150px;" src="../admin/image/' . $row["gambar"] . '" class="card-img-top" alt="' . $row["judul"] . '">
                                     <div class="card-body">
-                                        <h5 class="card-title">' . $row["judul"] . '</h5>
+                                        <h5 class="card-title text-center">' . $row["judul"] . '</h5>
                                     </div>
                                 </div>
                             </div>';

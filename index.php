@@ -167,10 +167,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '</div>';
                         echo '</div>';
                     }
-                } else {
-                    echo "0 results";
+                }  else {
+                    echo '<ul class="announcements-list">';
+                    echo "<li>Tidak ada berita</li>";
+                    echo '</ul>';
                 }
-                ?>gi
+                ?>
             </div>
             <!-- pengumuman -->
             <div class="col-md-4">
@@ -193,14 +195,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo '</div>';
                         }
                     } else {
-                        echo "0 results";
+                        echo "<li>Tidak ada pengumuman</li>";
                     }
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             echo '<li><a href="view/pengumuman.php?id=' . $row["id_artikel"] . '">' . $row["judul_artikel"] . '</a></li>';
                         }
-                    } else {
-                        echo "<li>Tidak ada pengumuman</li>";
                     }
                     ?>
                 </ul>

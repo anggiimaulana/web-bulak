@@ -51,8 +51,6 @@
 	</section>
 	<!-- SIDEBAR -->
 
-
-
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
@@ -66,7 +64,7 @@
 					<h1>Login</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="index.html">User</a>
+							<a href="index.html">#</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
                         <li>

@@ -17,6 +17,10 @@ body {
   margin: 0 10px;
 }
 
+.top-bar span {
+  font-size: 15px;
+}
+
 @media screen and (max-width:576px) {
   .top-bar span,
   .top-bar a {
