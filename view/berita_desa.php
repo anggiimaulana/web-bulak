@@ -32,7 +32,7 @@
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb" class="container mt-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../view/index.php"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="../"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item active" aria-current="page">Berita</li>
         </ol>
     </nav>

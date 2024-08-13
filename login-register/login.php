@@ -7,7 +7,7 @@ $password = $_POST['password'];
 
 // Validasi NIK
 if (!is_numeric($nik)) {
-    header('Location: ../login.php?status=error&message=NIK harus berupa angka.');
+    header('Location: ../login.php?status=error-NIK-harus-berupa-angka');
     exit();
 }
 
@@ -19,7 +19,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    header('Location: ../login.php?status=error&message=NIK tidak ditemukan.');
+    header('Location: ../login.php?status=error-NIK-tidak-ditemukan');
     exit();
 }
 
@@ -27,7 +27,7 @@ $user = $result->fetch_assoc();
 
 // Verifikasi password
 if (!password_verify($password, $user['password'])) {
-    header('Location: ../login.php?status=error&message=Password-salah.');
+    header('Location: ../login.php?status=error-password-salah');
     exit();
 }
 
@@ -39,5 +39,3 @@ $_SESSION['nik'] = $nik;
 header('Location: ../user/');
 exit();
 
-
-?>

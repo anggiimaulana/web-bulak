@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,10 +118,10 @@
 					popup: 'swal2-popup'
 				}
 			});
-		} else if (status === 'error') {
+		} else if (status === 'error-password-salah') {
 			Swal.fire({
 				icon: 'error',
-				title: 'Pendaftaran Gagal!',
+				title: 'Password Salah!',
 				text: 'Silahkan ulangi kembali!.',
 				customClass: {
 					popup: 'swal2-popup'
@@ -136,7 +136,7 @@
 					popup: 'swal2-popup'
 				}
 			});
-        } else if (status === 'error-nik-harus-angka') {
+        } else if (status === 'error-NIK-harus-berupa-angka') {
             Swal.fire({
 				icon: 'error',
 				title: 'NIK harus menggunakan angka!',
@@ -149,6 +149,16 @@
             Swal.fire({
 				icon: 'success',
 				title: 'Berhasil logout!',
+				text: '',
+				customClass: {
+					popup: 'swal2-popup'
+				}
+			});
+        }
+        else if (status === 'error-NIK-tidak-ditemukan') {
+            Swal.fire({
+				icon: 'error',
+				title: 'NIK tidak ditemukan!',
 				text: '',
 				customClass: {
 					popup: 'swal2-popup'

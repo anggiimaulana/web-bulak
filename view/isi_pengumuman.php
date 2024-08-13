@@ -29,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
         <!-- Breadcrumb start -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="../"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="pengumuman.php">Pengumuman</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
             </ol>

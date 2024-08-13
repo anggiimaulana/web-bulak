@@ -7,7 +7,7 @@ $password = $_POST['password'];
 
 // Validasi nip
 if (!is_numeric($nip)) {
-    header('Location: ../login.php?status=error&message=NIP harus berupa angka.');
+    header('Location: ../login-admin.php?status=error&message=NIP harus berupa angka.');
     exit();
 }
 
@@ -19,7 +19,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
-    header('Location: ../login.php?status=error-nip-tidak-ditemukan');
+    header('Location: ../login-admin.php?status=error-nip-tidak-ditemukan');
     exit();
 }
 
@@ -27,7 +27,7 @@ $user = $result->fetch_assoc();
 
 // Verifikasi password
 if (!password_verify($password, $user['password'])) {
-    header('Location: ../login.php?status=error-password-salah');
+    header('Location: ../login-admin.php?status=error-password-salah');
     exit();
 }
 

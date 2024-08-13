@@ -41,7 +41,7 @@ mysqli_close($conn);
         <!-- Breadcrumb start -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="../"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="berita_desa.php">Berita</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
             </ol>
