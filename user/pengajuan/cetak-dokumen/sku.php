@@ -34,9 +34,65 @@
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
         $tanggal_acc = $data_pengajuan['tanggal_acc'];
         $ttd = $data_pengajuan['nama_kuwu'];
+        $usaha = $data_pengajuan['nama_usaha'];
     } else {
         die('Error: Data pengajuan tidak ditemukan');
     }
+
+    // Menghitung jumlah keseluruhan data di tabel pengajuan
+    $jumlah_pengajuan = "SELECT COUNT(*) AS total FROM pengajuan";
+    $result_count = mysqli_query($conn, $jumlah_pengajuan);
+    if ($result_count) {
+        $row_count = mysqli_fetch_assoc($result_count);
+        $jumlah_keseluruhan_surat = $row_count['total'];
+
+        // Menentukan nomor surat berikutnya
+        $nomor_surat_berikutnya = $jumlah_keseluruhan_surat + 1;
+
+        $nomor_surat_berikutnya_padded = str_pad($nomor_surat_berikutnya, 3, '0', STR_PAD_LEFT);
+
+        echo "Nomor surat berikutnya: " . $nomor_surat_berikutnya_padded;
+    } else {
+        die('Error: Gagal menghitung jumlah keseluruhan data pengajuan. ' . mysqli_error($conn));
+    }
+
+
+    // Mengetahui kategori pengajuan
+    $kategori_sku = "SELECT id_kategori FROM pengajuan WHERE id_pengajuan = '$id_pengajuan'";
+    $result_sku = mysqli_query($conn, $kategori_sku);
+
+    if ($result_sku) {
+        $pengajuan_sku = mysqli_fetch_assoc($result_sku);
+        
+        // Mengambil nilai id_kategori dari hasil query
+        $id_kategori = $pengajuan_sku['id_kategori'];
+        
+        // Menambahkan angka 0 di depan id_kategori (misalnya menjadi 01, 02, dst.)
+        $kategori_pengajuan_sku = str_pad($id_kategori, 2, '0', STR_PAD_LEFT);
+        
+    } else {
+        die('Error: Gagal mengambil data kategori pengajuan');
+    }
+
+
+    // Menghitung jumlah keseluruhan data pengajuan sku
+    $jumlah_sku = "SELECT COUNT(*) AS total FROM pengajuan where id_kategori = 1";
+    $result_sku = mysqli_query($conn, $jumlah_sku);
+    if ($result_sku) {
+        $sku = mysqli_fetch_assoc($result_sku);
+        $jumlah_keseluruhan_sku = $sku['total'];
+        
+        // Menentukan nomor surat berikutnya
+        $nomor_sku_berikutnya = $jumlah_keseluruhan_sku + 1;
+        
+        // Menambahkan angka 0 di depan nomor surat (misalnya menjadi 001, 002, dst.)
+        $nomor_sku_berikutnya_padded = str_pad($nomor_sku_berikutnya, 3, '0', STR_PAD_LEFT);
+        
+    } else {
+        die('Error: Gagal menghitung jumlah keseluruhan data pengajuan');
+    }
+
+
 
     // Membuat nama file sesuai format yang diinginkan
     $nama_file = 'SKU_' . $userData['nama'] . '_' . $tanggal_acc . '.pdf';
@@ -90,7 +146,17 @@
 
     $pdf->SetFont('Times', '', 12);
     $pdf->SetXY($textX, $textY + 42);
-    $pdf->Cell(115, 7, 'Nomor : 510 / 358 / Des ', 0, 1, 'C');
+
+    // Mendapatkan tahun saat ini
+    $tahun_sekarang = date('Y');
+
+    // Mendapatkan bulan saat ini dalam format angka (01, 02, ..., 12)
+    $bulan_sekarang = str_pad(date('m'), 2, '0', STR_PAD_LEFT);
+
+
+    // Menggunakan variabel bulan dan tahun dalam output PDF
+    $pdf->Cell(115, 7, "Nomor : $nomor_surat_berikutnya_padded / $kategori_pengajuan_sku / $nomor_sku_berikutnya_padded / $bulan_sekarang / $tahun_sekarang", 0, 1, 'C');
+
 
     // keterangan 1
     $pdf->SetFont('Times', '', 12);
@@ -180,7 +246,7 @@
     $pdf->SetFont('Times', 'B', 12);
     $pdf->SetXY(150, $pdf->GetY() + 20);
     $nama_length = $pdf->GetStringWidth($ttd);
-    $centered_position = (320 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
+    $centered_position = (325 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
     $pdf->SetX($centered_position);
     $pdf->Cell(0, 7, $ttd, 0, 1, 'L');
 

@@ -41,6 +41,59 @@
         die('Error: Data pengajuan tidak ditemukan');
     }
 
+    // Menghitung jumlah keseluruhan data di tabel pengajuan
+    $jumlah_pengajuan = "SELECT COUNT(*) AS total FROM pengajuan";
+    $result_count = mysqli_query($conn, $jumlah_pengajuan);
+    if ($result_count) {
+        $row_count = mysqli_fetch_assoc($result_count);
+        $jumlah_keseluruhan_surat = $row_count['total'];
+
+        // Menentukan nomor surat berikutnya
+        $nomor_surat_berikutnya = $jumlah_keseluruhan_surat + 1;
+
+        $nomor_surat_berikutnya_padded = str_pad($nomor_surat_berikutnya, 3, '0', STR_PAD_LEFT);
+
+        echo "Nomor surat berikutnya: " . $nomor_surat_berikutnya_padded;
+    } else {
+        die('Error: Gagal menghitung jumlah keseluruhan data pengajuan. ' . mysqli_error($conn));
+    }
+
+
+    // Mengetahui kategori pengajuan
+    $kategori_sk = "SELECT id_kategori FROM pengajuan WHERE id_pengajuan = '$id_pengajuan'";
+    $result_sk = mysqli_query($conn, $kategori_sk);
+
+    if ($result_sk) {
+        $pengajuan_sk = mysqli_fetch_assoc($result_sk);
+        
+        // Mengambil nilai id_kategori dari hasil query
+        $id_kategori = $pengajuan_sk['id_kategori'];
+        
+        // Menambahkan angka 0 di depan id_kategori (misalnya menjadi 01, 02, dst.)
+        $kategori_pengajuan_sk = str_pad($id_kategori, 2, '0', STR_PAD_LEFT);
+        
+    } else {
+        die('Error: Gagal mengambil data kategori pengajuan');
+    }
+
+
+    // Menghitung jumlah keseluruhan data pengajuan skbn
+    $jumlah_sk = "SELECT COUNT(*) AS total FROM pengajuan where id_kategori = 2";
+    $result_sk = mysqli_query($conn, $jumlah_sk);
+    if ($result_sk) {
+        $sku = mysqli_fetch_assoc($result_sk);
+        $jumlah_keseluruhan_sk = $sku['total'];
+        
+        // Menentukan nomor surat berikutnya
+        $nomor_sk_berikutnya = $jumlah_keseluruhan_sk + 1;
+        
+        // Menambahkan angka 0 di depan nomor surat (misalnya menjadi 001, 002, dst.)
+        $nomor_sk_berikutnya_padded = str_pad($nomor_sk_berikutnya, 3, '0', STR_PAD_LEFT);
+        
+    } else {
+        die('Error: Gagal menghitung jumlah keseluruhan data pengajuan');
+    }
+
     // Membuat nama file sesuai format yang diinginkan
     $nama_file = 'SKBN_' . $userData['nama'] . '_' . $tanggal_acc . '.pdf';
 
@@ -93,7 +146,16 @@
 
     $pdf->SetFont('Times', '', 12);
     $pdf->SetXY($textX, $textY + 42);
-    $pdf->Cell(115, 7, 'Nomor : 470/ 119 /Des', 0, 1, 'C');
+    // Mendapatkan tahun saat ini
+    $tahun_sekarang = date('Y');
+
+    // Mendapatkan bulan saat ini dalam format angka (01, 02, ..., 12)
+    $bulan_sekarang = str_pad(date('m'), 2, '0', STR_PAD_LEFT);
+
+
+    // Menggunakan variabel bulan dan tahun dalam output PDF
+    $pdf->Cell(115, 7, "Nomor : $nomor_surat_berikutnya_padded / $kategori_pengajuan_sk / $nomor_sk_berikutnya_padded / $bulan_sekarang / $tahun_sekarang", 0, 1, 'C');
+
 
     // keterangan 1
     $pdf->SetFont('Times', '', 12);
@@ -262,7 +324,7 @@
     $pdf->SetFont('Times', 'B', 12);
     $pdf->SetXY(150, $pdf->GetY() + 14);
     $nama_length = $pdf->GetStringWidth($ttd);
-    $centered_position = (320 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
+    $centered_position = (325 - $nama_length) / 2; // Menghitung posisi X agar teks berada di tengah
     $pdf->SetX($centered_position);
     $pdf->Cell(0, 7, $ttd, 0, 1, 'L');
 
