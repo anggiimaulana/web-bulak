@@ -21,7 +21,7 @@
     
     <nav class="container navbar navbar-expand-lg bg-body-light">
       <div class="container-fluid">
-        <a href="../index.php">
+        <a href="../">
                         <img src="../desa-img/logo_indra.jpeg" alt="Logo Desa Bulak"> <!-- Replace with your logo -->
                     </a>
                     <div class="ms-3">

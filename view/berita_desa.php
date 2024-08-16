@@ -20,7 +20,7 @@
  $starting_limit = ($page - 1) * $results_per_page;
 
  // Retrieve selected results from database and display them on page
- $sql = "SELECT id_artikel, judul_artikel, tanggal, isi_artikel, gambar FROM artikel where kategori = 'Berita' ORDER BY tanggal DESC LIMIT $starting_limit, $results_per_page";
+ $sql = "SELECT id_artikel, judul_artikel, tanggal, isi_artikel, gambar FROM artikel where kategori = 'Berita' and status = 'Publish' ORDER BY tanggal DESC LIMIT $starting_limit, $results_per_page";
  $result = mysqli_query($conn, $sql);
  ?>
 
