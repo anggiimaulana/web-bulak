@@ -1,23 +1,5 @@
 <?php
 require 'config/db.php';
-
-// Handle feedback form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $message = htmlspecialchars($_POST['message']);
-
-    $to = "admin@example.com"; // Ganti dengan email admin
-    $subject = "Kritik dan Saran dari $name";
-    $body = "Nama: $name\nEmail: $email\n\nPesan:\n$message";
-    $headers = "From: $email";
-
-    if (mail($to, $subject, $body, $headers)) {
-        $feedbackMessage = "<br><p class='text-success'>Pesan berhasil dikirim.</p>";
-    } else {
-        $feedbackMessage = "<br><p class='text-warning'>Pesan gagal dikirim.</p>";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -218,11 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="map-section container mt-5">
             <h2>Lokasi Desa Bulak</h2>
             <div id="mapp">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.522209748!2d108.31960031476916!3d-6.454843995348892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f0b7c9e8d8d5f%3A0x1e3f0e3b3e3c0a0!2sBulak%2C%20Jatibarang%2C%20Indramayu%2C%20Jawa%20Barat!5e0!3m2!1sen!2sid!4v1659759489121!5m2!1sen!2sid” width=“600” height=“450” style=“border:0;” allowfullscreen=“” loading=“lazy”"
-                    width="100%" height="400" style="border: 2px solid #007bff; border-radius: 5px;" allowfullscreen=""
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.3586808019672!2d108.30824577436303!3d-6.476172493515648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ec7992543c9fb%3A0xee009a3dbcdea6c7!2sDesa%20bulak%20kecamatan%20jatibarang!5e0!3m2!1sid!2sid!4v1723801665379!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
     </div>
