@@ -19,6 +19,17 @@ $displayName = $userData['nama'];
 if (strlen($displayName) > 30) {
     $displayName = substr($displayName, 0, 30) . '...';
 }
+
+// Query untuk menghitung jumlah pengajuan baru dengan status 'Pending'
+$jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan FROM pengajuan WHERE status = 'Pending'";
+$hasil = mysqli_query($conn, $jumlah_pengajuan_baru);
+
+$total_pengajuan = 0;
+
+if ($hasil && mysqli_num_rows($hasil) > 0) {
+    $row = mysqli_fetch_assoc($hasil);
+    $total_pengajuan = $row['total_pengajuan'];
+}
 ?>
 <body>
 
@@ -27,7 +38,7 @@ if (strlen($displayName) > 30) {
         <?php include 'brand.php' ?>
         <ul class="side-menu top">
             <li>
-                <a href="index.php">
+                <a href="./">
                     <i class='bx bxs-dashboard' ></i>
                     <span class="text">Dashboard</span>
                 </a>
@@ -41,7 +52,11 @@ if (strlen($displayName) > 30) {
             <li>
                 <a href="pengajuan_user.php">
                     <i class='bx bxs-file' ></i>
-                    <span class="text">Pengajuan User</span>
+                    <span class="text">Pengajuan User 
+                        <?php if ($total_pengajuan > 0): ?>
+                            <sup><?php echo $total_pengajuan; ?></sup>
+                        <?php endif; ?>
+                    </span>
                 </a>
             </li>
             <li>

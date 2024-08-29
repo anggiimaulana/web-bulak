@@ -68,6 +68,9 @@ body {
 	overflow-x: hidden;
 	scrollbar-width: none;
 }
+#sidebar sup {
+	color: #ff0b0b;
+}
 :state(webkit-scrollbar) {
     display: none;
 }
@@ -178,6 +181,10 @@ body {
 	min-width: calc(60px  - ((4px + 6px) * 2));
 	display: flex;
 	justify-content: center;
+}
+
+sup {
+	color: #ff0b0b;
 }
 /* SIDEBAR */
 
