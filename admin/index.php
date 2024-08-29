@@ -68,14 +68,14 @@ $sql_admins = "SELECT admin_id, nama, nip, pekerjaan, alamat FROM admin";
 $result_admins = $conn->query($sql_admins);
 
 // Query untuk menghitung jumlah pengajuan baru dengan status 'Pending'
-$jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan FROM pengajuan WHERE status = 'Pending'";
+$jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan_user FROM pengajuan WHERE status = 'Pending'";
 $hasil = mysqli_query($conn, $jumlah_pengajuan_baru);
 
-$total_pengajuan = 0;
+$total_pengajuan_user = 0;
 
 if ($hasil && mysqli_num_rows($hasil) > 0) {
     $row = mysqli_fetch_assoc($hasil);
-    $total_pengajuan = $row['total_pengajuan'];
+    $total_pengajuan_user = $row['total_pengajuan_user'];
 }
 ?>
 
@@ -102,8 +102,8 @@ if ($hasil && mysqli_num_rows($hasil) > 0) {
                 <a href="pengajuan_user.php">
                     <i class='bx bxs-file' ></i>
                     <span class="text">Pengajuan User 
-                        <?php if ($total_pengajuan > 0): ?>
-                            <sup><?php echo $total_pengajuan; ?></sup>
+                        <?php if ($total_pengajuan_user > 0): ?>
+                            <sup><?php echo $total_pengajuan_user; ?></sup>
                         <?php endif; ?>
                     </span>
                 </a>

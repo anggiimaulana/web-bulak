@@ -20,6 +20,18 @@ if (strlen($displayName) > 30) {
     $displayName = substr($displayName, 0, 30) . '...';
 }
 
+// Query untuk menghitung jumlah pengajuan baru dengan status 'Pending'
+$jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan FROM pengajuan WHERE status = 'Pending'";
+$hasil = mysqli_query($conn, $jumlah_pengajuan_baru);
+
+$total_pengajuan = 0;
+
+if ($hasil && mysqli_num_rows($hasil) > 0) {
+    $row = mysqli_fetch_assoc($hasil);
+    $total_pengajuan = $row['total_pengajuan'];
+}
+
+
 $row = null; // Inisialisasi variabel
 
 // Ambil id dari parameter GET
@@ -61,16 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-    // Query untuk menghitung jumlah pengajuan baru dengan status 'Pending'
-    $jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan FROM pengajuan WHERE status = 'Pending'";
-    $hasil = mysqli_query($conn, $jumlah_pengajuan_baru);
-
-    $total_pengajuan = 0;
-
-    if ($hasil && mysqli_num_rows($hasil) > 0) {
-        $row = mysqli_fetch_assoc($hasil);
-        $total_pengajuan = $row['total_pengajuan'];
-    }
 
 $conn->close();
 ?>
