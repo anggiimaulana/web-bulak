@@ -35,27 +35,11 @@
         // Pastikan kolom `tanggal_pengajuan` benar-benar ada dan tidak kosong
         $ttd = $data_pengajuan['nama_kuwu'];
         $tanggal_acc = $data_pengajuan['tanggal_acc'];
+        $nomor_sktm = $data_pengajuan['id_pengajuan'];
+        $nomor_surat_berikutnya_padded = str_pad($nomor_sktm, 3, '0', STR_PAD_LEFT);
     } else {
         die('Error: Data pengajuan tidak ditemukan');
     }
-
-    // Menghitung jumlah keseluruhan data di tabel pengajuan
-    $jumlah_pengajuan = "SELECT COUNT(*) AS total FROM pengajuan";
-    $result_count = mysqli_query($conn, $jumlah_pengajuan);
-    if ($result_count) {
-        $row_count = mysqli_fetch_assoc($result_count);
-        $jumlah_keseluruhan_surat = $row_count['total'];
-
-        // Menentukan nomor surat berikutnya
-        $nomor_surat_berikutnya = $jumlah_keseluruhan_surat + 1;
-
-        $nomor_surat_berikutnya_padded = str_pad($nomor_surat_berikutnya, 3, '0', STR_PAD_LEFT);
-
-        echo "Nomor surat berikutnya: " . $nomor_surat_berikutnya_padded;
-    } else {
-        die('Error: Gagal menghitung jumlah keseluruhan data pengajuan. ' . mysqli_error($conn));
-    }
-
 
     // Mengetahui kategori pengajuan
     $kategori_sk = "SELECT id_kategori FROM pengajuan WHERE id_pengajuan = '$id_pengajuan'";
@@ -266,4 +250,3 @@
     flush();
     // $pdf->Output();
     $pdf->Output('D', $nama_file);
-
