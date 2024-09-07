@@ -20,12 +20,24 @@ if (strlen($displayName) > 30) {
     $displayName = substr($displayName, 0, 30) . '...';
 }
 
+// Query untuk menghitung jumlah pengajuan baru dengan status 'Pending'
+$jumlah_pengajuan_baru = "SELECT COUNT(*) as total_pengajuan FROM pengajuan WHERE status = 'Pending'";
+$hasil = mysqli_query($conn, $jumlah_pengajuan_baru);
+
+$total_pengajuan = 0;
+
+if ($hasil && mysqli_num_rows($hasil) > 0) {
+    $row = mysqli_fetch_assoc($hasil);
+    $total_pengajuan = $row['total_pengajuan'];
+}
+
+
 $row = null; // Inisialisasi variabel
 
 // Ambil id dari parameter GET
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT p.id_pengajuan, u.nama AS nama_user, k.jenis_pengajuan AS kategori, p.tanggal_pengajuan, p.nama_usaha, p.status 
+    $sql = "SELECT p.id_pengajuan, p.nama_ortu AS nama_ortu, k.jenis_pengajuan AS kategori, p.tanggal_pengajuan, p.nama_kk, p.nama_akte_dokumen, p.status, p.pekerjaan_ortu, p.penghasilan 
             FROM pengajuan p
             JOIN user u ON p.nik = u.nik
             JOIN kategori_pengajuan k ON p.id_kategori = k.id_kategori_pengajuan
@@ -54,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssi", $status, $tanggal_acc, $ttd, $id);
 
     if ($stmt->execute()) {
-        header("Location: ../pengajuan_user.php?keterangan=pengajuan-sku-success");
+        header("Location: ../pengajuan_user.php?keterangan=pengajuan-skbn-success");
         exit;
     } else {
         echo "Error updating record: " . htmlspecialchars($conn->error);
@@ -104,7 +116,7 @@ $conn->close();
         <?php include 'brand.php' ?>
         <ul class="side-menu top">
             <li>
-                <a href="../index.php">
+                <a href="../">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
@@ -118,7 +130,11 @@ $conn->close();
             <li class="active">
                 <a href="../pengajuan_user.php">
                     <i class='bx bxs-file'></i>
-                    <span class="text">Pengajuan User</span>
+                    <span class="text">Pengajuan User 
+                        <?php if ($total_pengajuan > 0): ?>
+                            <sup><?php echo $total_pengajuan; ?></sup>
+                        <?php endif; ?>
+                    </span>
                 </a>
             </li>
             <li>
@@ -167,30 +183,23 @@ $conn->close();
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Pengajuan Surat Keterangan Usaha</h1>
+                    <h1>Pengajuan Surat Keterangan Penghasilan Orang Tua</h1>
                     <ul class="breadcrumb">
                         <li><a href="index.php">Admin</a></li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li><a href="index.php">Pengajuan User</a></li>
                         <li><i class='bx bx-chevron-right'></i></li>
-                        <li><a class="active" href="pengajuan_user.php">SKU</a></li>
+                        <li><a class="active" href="pengajuan_user.php">SKPOT</a></li>
                     </ul>
                 </div>
             </div>
             <div class="table-data">
                 <div class="order">
-                        <div class="formulir-pengajuan" id="pengajuanForm">
+                    <div class="formulir-pengajuan" id="pengajuanForm">
                         <h3 style="margin-bottom:10px; font-size:22px; font-weight: 600;">Form Pengajuan</h3>
-                        <form action="sku.php" method="POST">
+                        <form action="skbn.php" method="POST">
                             <input type="hidden" name="id_pengajuan" value="<?php echo htmlspecialchars($row['id_pengajuan'] ?? ''); ?>">
-
                             <div class="form-row">
-                                <div class="form-column">
-                                    <div class="data-user">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" id="nama" value="<?php echo htmlspecialchars($row['nama_user'] ?? ''); ?>" disabled>
-                                    </div>
-                                </div>
                                 <div class="form-column">
                                     <div class="data-user">
                                         <label for="jenis_pengajuan">Kategori</label>
@@ -199,19 +208,35 @@ $conn->close();
                                 </div>
                             </div>
 
-                            <h3 style="margin-bottom:10px; font-size:20px; font-weight: 600;">Mengajukan Usaha: </h3>
+                            <h3 style="margin-bottom:10px; font-size:18px; font-weight: 600;">Menyatakan Bahwa: </h3>
 
                             <div class="form-row">
                                 <div class="form-column">
                                     <div class="data-user">
-                                        <label for="nama_usaha">Nama Usaha</label>
-                                        <input type="text" id="nama_usaha" value="<?php echo htmlspecialchars($row['nama_usaha'] ?? ''); ?>" disabled>
+                                        <label for="nama_ortu">Nama Orang Tua</label>
+                                        <input type="text" id="nama_ortu" value="<?php echo htmlspecialchars($row['nama_ortu'] ?? ''); ?>" disabled>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="pekerjaan_ortu">Pekerjaan</label>
+                                        <input type="text" id="pekerjaan_ortu" value="<?php echo htmlspecialchars($row['pekerjaan_ortu'] ?? ''); ?>" disabled>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="penghasilan">Penghasilan</label>
+                                        <input type="text" id="penghasilan" value="<?php echo htmlspecialchars($row['penghasilan'] ?? ''); ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-column">
                                     <div class="data-user">
+                                        <label for="nama_kk">Nama Anak</label>
+                                        <input type="text" id="nama_kk" value="<?php echo htmlspecialchars($row['nama_kk'] ?? ''); ?>" disabled>
+                                    </div>
+                                    <div class="data-user">
                                         <label for="tanggal_pengajuan">Tanggal Pengajuan</label>
                                         <input type="date" id="tanggal_pengajuan" value="<?php echo htmlspecialchars($row['tanggal_pengajuan'] ?? ''); ?>" disabled>
+                                    </div>
+                                    <div class="data-user">
+                                        <label for="jenis_pengajuan">Mengajukan</label>
+                                        <input type="text" id="jenis_pengajuan" value="<?php echo htmlspecialchars($row['kategori'] ?? ''); ?>" disabled>
                                     </div>
                                 </div>
                             </div>

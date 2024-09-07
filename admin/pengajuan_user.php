@@ -172,6 +172,7 @@ if (isset($_GET['reset'])) {
                                         <option value="4" <?php if ($kategori == 4) echo 'selected';?>>Surat Keterangan Penduduk Sementara</option>
                                         <option value="5" <?php if ($kategori == 5) echo 'selected';?>>Surat Keterangan Domisili</option>
                                         <option value="6" <?php if ($kategori == 6) echo 'selected';?>>Surat Keterangan</option>
+                                        <option value="7" <?php if ($kategori == 7) echo 'selected';?>>Surat Keterangan Penghasilan Orang Tua</option>
                                     </select>
                                     <h5 style="margin-top: 10px;">Status</h5>
                                     <select name="status" onchange="this.form.submit()">
@@ -241,6 +242,9 @@ if (isset($_GET['reset'])) {
                                             break;
                                         case 'Surat Keterangan':
                                             $url .= 'sk.php';
+                                            break;
+                                        case 'Surat Keterangan Penghasilan Orang Tua':
+                                            $url .= 'skpot.php';
                                             break;
                                         default:
                                             $url .= 'sk.php'; // Default URL jika tidak ada yang sesuai

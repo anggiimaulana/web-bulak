@@ -36,6 +36,8 @@
 				return "pengajuan/cetak-dokumen/skd.php?id_pengajuan=" . $id_pengajuan;
 			case 6:
 				return "pengajuan/cetak-dokumen/sk.php?id_pengajuan=" . $id_pengajuan;
+			case 7:
+				return "pengajuan/cetak-dokumen/skpot.php?id_pengajuan=" . $id_pengajuan;
 			default:
 				return "#";
 		}
@@ -130,7 +132,7 @@
 				}
 
 				// Query untuk menghitung jumlah pengajuan yang disetujui
-				$sql_acc = "SELECT COUNT(*) AS acc_pengajuan FROM pengajuan WHERE nik = ? AND status = 'acc'";
+				$sql_acc = "SELECT COUNT(*) AS acc_pengajuan FROM pengajuan WHERE nik = ? AND status = 'Acc'";
 				$stmt_acc = $conn->prepare($sql_acc);
 				if ($stmt_acc === false) {
 					die('Prepare failed: ' . htmlspecialchars($conn->error));

@@ -94,6 +94,7 @@
                     $row4 = mysqli_fetch_assoc($result);
                     $row5 = mysqli_fetch_assoc($result);
                     $row6 = mysqli_fetch_assoc($result);
+                    $row7 = mysqli_fetch_assoc($result);
                 }
                 ?>
                 <li data-jenis="sku">
@@ -130,6 +131,12 @@
                     <i class='bx bx-mail-send'></i>
                     <span class="text">
                         <p><?php echo $row6['jenis_pengajuan']; ?></p>
+                    </span>
+                </li>
+                <li data-jenis="skpot">
+                    <i class='bx bx-wallet'></i>
+                    <span class="text">
+                        <p><?php echo $row7['jenis_pengajuan']; ?></p>
                     </span>
                 </li>
             </ul>
