@@ -1,5 +1,5 @@
 <?php 
-require '../function/koneksi.php';
+require '../config/db.php';
 ?>
     <!-- navbar -->
     <?php include '../template/header.php' ?>

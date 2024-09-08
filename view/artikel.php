@@ -1,5 +1,5 @@
 <?php
-require '../function/koneksi.php';
+require '../config/db.php';
 
 $article_id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Get ID from URL or default to 1
 

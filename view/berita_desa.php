@@ -1,5 +1,5 @@
 <?php
- require '../function/koneksi.php';
+ require '../config/db.php';
 
  // Define the number of results per page
  $results_per_page = 5;

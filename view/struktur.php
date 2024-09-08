@@ -1,8 +1,3 @@
-<?php
-require '../function/koneksi.php'
-?>
-
-
     <!-- navbar -->
     <?php include '../template/header.php' ?>
 
